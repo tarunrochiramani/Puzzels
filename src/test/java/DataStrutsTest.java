@@ -3,8 +3,10 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
@@ -211,6 +213,109 @@ public class DataStrutsTest {
         return result;
     }
 
+    @Test
+    public void testIsCircularWithEmptyList() {
+        LinkedListNode head = null;
+
+        boolean circular = dataStruts.isCircular(head);
+        assertFalse(circular);
+    }
+
+    @Test
+    public void testIsCircular() {
+        int[] values = new int[] {1, 2, 3};
+        LinkedListNode head = dataStruts.createList(values);
+
+        head = makeListCircular(head);
+
+        boolean circular = dataStruts.isCircular(head);
+        assertTrue(circular);
+    }
+
+    @Test
+    public void testFindMidOfList() {
+        assertNull(dataStruts.getMidOfLinkList(null));
+    }
+
+    @Test
+    public void testFindMidOfCircularList() {
+        int[] values = new int[] {1, 2};
+        LinkedListNode head = dataStruts.createList(values);
+        head = makeListCircular(head);
+
+        assertNull(dataStruts.getMidOfLinkList(head));
+    }
+
+    @Test
+    public void testFindMidOfValidOddSizedList() {
+        int[] values = new int[] {1, 2, 3};
+        LinkedListNode head = dataStruts.createList(values);
+
+        LinkedListNode mid = dataStruts.getMidOfLinkList(head);
+        assertEquals(values[(values.length / 2)], mid.getData());
+    }
+
+    @Test
+    public void testFindMidOfValidEvenSizedList() {
+        int[] values = new int[] {1, 2, 3, 4};
+        LinkedListNode head = dataStruts.createList(values);
+
+        LinkedListNode mid = dataStruts.getMidOfLinkList(head);
+        assertEquals(values[(values.length / 2)], mid.getData());
+    }
+
+    @Test
+    public void testListPalindromeForSingleValueList() {
+        LinkedListNode head = dataStruts.createList(1);
+
+        assertTrue(dataStruts.isListPalindrome(head));
+    }
+
+    @Test
+    public void testListPalindromeForEmptyList() {
+        assertFalse(dataStruts.isListPalindrome(null));
+    }
+
+    @Test
+    public void testListPalindromeForEvenSizeList() {
+        int[] values = new int[] {1, 2, 2, 1};
+        LinkedListNode head = dataStruts.createList(values);
+
+        assertTrue(dataStruts.isListPalindrome(head));
+
+        values = new int[] {1, 2, 2, 3};
+        head = dataStruts.createList(values);
+
+        assertFalse(dataStruts.isListPalindrome(head));
+    }
 
 
+    @Test
+    public void testListPalindromeForOddSizeList() {
+        int[] values = new int[] {1, 2, 1};
+        LinkedListNode head = dataStruts.createList(values);
+
+        assertTrue(dataStruts.isListPalindrome(head));
+
+        values = new int[] {1, 2, 2};
+        head = dataStruts.createList(values);
+
+        assertFalse(dataStruts.isListPalindrome(head));
+    }
+
+
+    private LinkedListNode makeListCircular(LinkedListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        LinkedListNode current = head;
+        while (current.getNext() != null) {
+            current = current.getNext();
+        }
+
+        current.setNext(head);
+
+        return head;
+    }
 }

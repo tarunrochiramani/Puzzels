@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class DataStruts {
 
     public LinkedListNode createList(int... values) {
@@ -147,6 +149,102 @@ public class DataStruts {
 
         return headToReturn;
     }
+
+    public boolean isCircular(LinkedListNode head) {
+        if (head == null) {
+            return false;
+        }
+
+        LinkedListNode current = head;
+        LinkedListNode fastRunner = null;
+
+        if (current.getNext() != null) {
+            fastRunner = current.getNext().getNext();
+        }
+
+        while (true) {
+            if (fastRunner == null) {
+                return false;
+            }
+
+            if (fastRunner == current) {
+                break;
+            }
+
+            fastRunner = fastRunner.getNext();
+            if (fastRunner != null) {
+                fastRunner = fastRunner.getNext();
+            }
+            current = current.getNext();
+        }
+
+        return true;
+    }
+
+    public LinkedListNode getMidOfLinkList(LinkedListNode head) {
+        if (head == null || head.getNext() == null) {
+            return null;
+        }
+
+        LinkedListNode current = head;
+        LinkedListNode runner = head;
+
+        while (runner != null && runner.getNext() != null) {
+            current = current.getNext();
+            runner = runner.getNext();
+            if (runner != null) {
+                runner = runner.getNext();
+            }
+
+            if (runner == current) {
+                return null; // circular, cannot find mid.
+            }
+        }
+
+        return current;
+    }
+
+    public boolean isListPalindrome(LinkedListNode head) {
+        if (head == null) {
+            return false;
+        }
+
+        LinkedListNode current = head;
+        LinkedListNode runner = head;
+        Stack<Integer> myStack = new Stack<Integer>();
+        while (runner != null && runner.getNext() != null) {
+            myStack.push(current.getData());
+            current = current.getNext();
+            runner = runner.getNext();
+            if (runner != null) {
+                runner = runner.getNext();
+            }
+
+            if (runner == current) {
+                return false; // circular, cannot find mid.
+            }
+        }
+
+        if (myStack.empty()) {
+            return true;
+        }
+
+        //Odd
+        if (runner != null && runner.getNext() == null) {
+            current = current.getNext();
+        }
+
+        while (current != null) {
+            if (current.getData() != myStack.peek()) {
+                return false;
+            }
+            myStack.pop();
+            current = current.getNext();
+        }
+
+        return true;
+    }
+
 
 
     private int addValues(int value1, int value2, int carry, LinkedListNode node){
