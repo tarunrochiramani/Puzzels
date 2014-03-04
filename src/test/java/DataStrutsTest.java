@@ -303,6 +303,43 @@ public class DataStrutsTest {
         assertFalse(dataStruts.isListPalindrome(head));
     }
 
+    @Test
+    public void testCanSortStackWhenAlreadySorted() {
+        Stack<Integer> originalStack = new Stack<Integer>();
+        originalStack.push(2);
+        originalStack.push(4);
+
+        Stack<Integer> returnedStack = dataStruts.sortStack(originalStack);
+
+        Assert.assertEquals(4, returnedStack.pop().intValue());
+        Assert.assertEquals(2, returnedStack.pop().intValue());
+    }
+
+    @Test
+    public void testCanSortStackWhenOnlyOneElement() {
+        Stack<Integer> originalStack = new Stack<Integer>();
+        originalStack.push(2);
+
+        Stack<Integer> returnedStack = dataStruts.sortStack(originalStack);
+
+        Assert.assertEquals(2, returnedStack.pop().intValue());
+    }
+
+    @Test
+    public void testCanSortStackWhenStackNotSorted() {
+        Stack<Integer> originalStack = new Stack<Integer>();
+        originalStack.push(2);
+        originalStack.push(1);
+        originalStack.push(3);
+
+        Stack<Integer> returnedStack = dataStruts.sortStack(originalStack);
+
+        Assert.assertEquals(3, returnedStack.pop().intValue());
+        Assert.assertEquals(2, returnedStack.pop().intValue());
+        Assert.assertEquals(1, returnedStack.pop().intValue());
+    }
+
+
 
     private LinkedListNode makeListCircular(LinkedListNode head) {
         if (head == null) {

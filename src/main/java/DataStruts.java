@@ -245,6 +245,23 @@ public class DataStruts {
         return true;
     }
 
+    public Stack<Integer> sortStack(Stack<Integer> originalStack) {
+        if (originalStack == null || originalStack.isEmpty()) {
+            return originalStack;
+        }
+
+        Stack<Integer> returnStack = new Stack<Integer>();
+        while (!originalStack.isEmpty()) {
+            Integer tmp = originalStack.pop();
+            while (!returnStack.isEmpty() && returnStack.peek() > tmp) {
+                originalStack.push(returnStack.pop());
+            }
+            returnStack.push(tmp);
+        }
+
+        return returnStack;
+    }
+
 
 
     private int addValues(int value1, int value2, int carry, LinkedListNode node){
