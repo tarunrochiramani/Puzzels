@@ -113,4 +113,34 @@ public class ArraysAndStrings {
             nonSpaceCharacterIndex --;
         }
     }
+
+
+    public String compressString(String input) {
+        if (input == null || input.isEmpty()) {
+            return null;
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+
+        int count = 0;
+        char lastChar = '\0';
+        for (char c : input.toCharArray()) {
+            if (c != lastChar) {
+                if (count > 1) {
+                    stringBuilder.append(count);
+                }
+                count = 1;
+                stringBuilder.append(c);
+            } else {
+                count ++;
+            }
+
+            lastChar = c;
+        }
+
+        if (count > 1) {
+            stringBuilder.append(count);
+        }
+
+        return stringBuilder.toString();
+    }
 }

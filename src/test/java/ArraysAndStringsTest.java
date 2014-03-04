@@ -3,6 +3,7 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class ArraysAndStringsTest {
@@ -127,5 +128,29 @@ public class ArraysAndStringsTest {
 
         arraysAndStrings.insert20AtWhiteSpace(characters);
         assertEquals(expectedStr, new String(characters));
+    }
+
+    @Test
+    public void testCompressForNullAndEmptyString() {
+        assertNull(arraysAndStrings.compressString(null));
+        assertNull(arraysAndStrings.compressString(""));
+    }
+
+    @Test
+    public void testCompressForSingleCharString() {
+        String input = "a";
+        assertEquals(input, arraysAndStrings.compressString(input));
+    }
+
+    @Test
+    public void testCompressForNonRepeatingCharString() {
+        String input = "abcdefgh";
+        assertEquals(input, arraysAndStrings.compressString(input));
+    }
+
+    @Test
+    public void testCompressForRepeatingCharString() {
+        String input = "aabccddddeff";
+        assertEquals("a2bc2d4ef2", arraysAndStrings.compressString(input));
     }
 }
