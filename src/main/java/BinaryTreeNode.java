@@ -4,6 +4,10 @@ public class BinaryTreeNode {
     private BinaryTreeNode left;
     private BinaryTreeNode right;
 
+    public BinaryTreeNode(int value) {
+        this.value = value;
+    }
+
     public int getValue() {
         return value;
     }
