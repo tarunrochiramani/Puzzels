@@ -38,9 +38,7 @@ public class HeapSortTest {
 
         HeapSort.sort(array);
 
-        for (int count =0; count < array.length -2; count ++) {
-            assertTrue(array[count] <= array[count+1]);
-        }
+        validateSortedArray(array);
     }
 
     @Test
@@ -49,9 +47,7 @@ public class HeapSortTest {
 
         HeapSort.sort(array);
 
-        for (int count =0; count < array.length -2; count ++) {
-            assertTrue(array[count] <= array[count+1]);
-        }
+        validateSortedArray(array);
     }
 
     @Test
@@ -60,9 +56,7 @@ public class HeapSortTest {
 
         HeapSort.sort(array);
 
-        for (int count =0; count < array.length -2; count ++) {
-            assertTrue(array[count] <= array[count+1]);
-        }
+        validateSortedArray(array);
     }
 
 
@@ -72,9 +66,7 @@ public class HeapSortTest {
 
         HeapSort.sort(array);
 
-        for (int count =0; count < array.length -2; count ++) {
-            assertTrue(array[count] <= array[count+1]);
-        }
+        validateSortedArray(array);
     }
 
     @Test
@@ -83,7 +75,11 @@ public class HeapSortTest {
 
         HeapSort.sort(array);
 
-        for (int count =0; count < array.length -2; count ++) {
+        validateSortedArray(array);
+    }
+
+    private void validateSortedArray(int[] array) {
+        for (int count =0; count < array.length -1; count ++) {
             assertTrue(array[count] <= array[count+1]);
         }
     }
