@@ -2,7 +2,7 @@ package com.tr.datastruts;
 
 import java.util.Stack;
 
-public class DataStruts {
+public class LinkedListOperations {
 
     public LinkedListNode createList(int... values) {
         if (values.length == 0) {

@@ -1,7 +1,5 @@
 package com.tr.datastruts;
 
-import com.tr.datastruts.DataStruts;
-import com.tr.datastruts.LinkedListNode;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -15,19 +13,19 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
-public class DataStrutsTest {
+public class LinkedListOperationsTest {
 
-    private DataStruts dataStruts = new DataStruts();
+    private LinkedListOperations linkedListOperations = new LinkedListOperations();
 
     @Test
     public void testCreateWithNoValues() {
-        assertNull(dataStruts.createList());
+        assertNull(linkedListOperations.createList());
     }
 
     @Test
     public void testCreateWithValues() {
         int[] values = new int[]{1, 2 ,3 };
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
         assertNotNull(head);
         LinkedListNode current = head;
@@ -41,15 +39,15 @@ public class DataStrutsTest {
 
     @Test
     public void testSplitWithNull() {
-        assertNull(dataStruts.spiltLinkedList(null, 0));
+        assertNull(linkedListOperations.spiltLinkedList(null, 0));
     }
 
     @Test
     public void testSplitWithNonExistentHigherValue () {
         int[] values = new int[] {1, 2, 3};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode splittedListHead = dataStruts.spiltLinkedList(head, 4);
+        LinkedListNode splittedListHead = linkedListOperations.spiltLinkedList(head, 4);
 
         assertNotNull(splittedListHead);
         LinkedListNode current = splittedListHead;
@@ -64,9 +62,9 @@ public class DataStrutsTest {
     @Test
     public void testSplitWithNonExistentLowerValue () {
         int[] values = new int[] {1, 2, 3};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode splittedListHead = dataStruts.spiltLinkedList(head, 0);
+        LinkedListNode splittedListHead = linkedListOperations.spiltLinkedList(head, 0);
 
         assertNotNull(splittedListHead);
         LinkedListNode current = splittedListHead;
@@ -81,9 +79,9 @@ public class DataStrutsTest {
     @Test
     public void testSplitWithValidValue() {
         int[] values = new int[] {1, 2, 4, 3, 4};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode splittedListHead = dataStruts.spiltLinkedList(head, 4);
+        LinkedListNode splittedListHead = linkedListOperations.spiltLinkedList(head, 4);
 
         assertNotNull(splittedListHead);
         LinkedListNode current = splittedListHead;
@@ -99,18 +97,18 @@ public class DataStrutsTest {
     @Test
     public void testGetNthNodeToLastForNthOutside() {
         int[] values = new int[] {1, 2};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        Assert.assertNull(dataStruts.getNthNodeToLast(head, values.length + 1));
+        Assert.assertNull(linkedListOperations.getNthNodeToLast(head, values.length + 1));
     }
 
     @Test
     public void testGetNthNodeToLast() {
         int[] values = new int[] {1, 2, 3, 4, 5};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
         int nthPositionToFind = 2;
-        LinkedListNode current = dataStruts.getNthNodeToLast(head, nthPositionToFind);
+        LinkedListNode current = linkedListOperations.getNthNodeToLast(head, nthPositionToFind);
 
         assertNotNull(current);
         assertEquals(values[values.length - nthPositionToFind - 1], current.getData());
@@ -119,10 +117,10 @@ public class DataStrutsTest {
     @Test
     public void testAddListsWhenOneListIsNull() {
         int[] values = new int[] {1, 2, 3};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode result1 = dataStruts.addLists(null, head);
-        LinkedListNode result2 = dataStruts.addLists(head, null);
+        LinkedListNode result1 = linkedListOperations.addLists(null, head);
+        LinkedListNode result2 = linkedListOperations.addLists(head, null);
 
         assertNotNull(result1);
         assertNotNull(result2);
@@ -143,9 +141,9 @@ public class DataStrutsTest {
     public void testAddLists() {
         int[] values = new int[] {1, 2, 3};
         Integer[] sumInReversed = add(values, null);
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode results = dataStruts.addLists(head, head);
+        LinkedListNode results = linkedListOperations.addLists(head, head);
 
         assertNotNull(results);
         for (int count = 0; count < sumInReversed.length; count++) {
@@ -159,10 +157,10 @@ public class DataStrutsTest {
         int[] values = new int[] {1, 2, 3};
         int[] value2 = new int[] {9, 7, 6, 9};
         Integer[] sumInReversed = add(values, value2);
-        LinkedListNode list1 = dataStruts.createList(values);
-        LinkedListNode list2 = dataStruts.createList(value2);
+        LinkedListNode list1 = linkedListOperations.createList(values);
+        LinkedListNode list2 = linkedListOperations.createList(value2);
 
-        LinkedListNode results = dataStruts.addLists(list1, list2);
+        LinkedListNode results = linkedListOperations.addLists(list1, list2);
 
         assertNotNull(results);
         for (int count = 0; count < sumInReversed.length; count++) {
@@ -176,10 +174,10 @@ public class DataStrutsTest {
         int[] values = new int[] {1};
         int[] value2 = new int[] {9, 7, 6, 9};
         Integer[] sumInReversed = add(values, value2);
-        LinkedListNode list1 = dataStruts.createList(values);
-        LinkedListNode list2 = dataStruts.createList(value2);
+        LinkedListNode list1 = linkedListOperations.createList(values);
+        LinkedListNode list2 = linkedListOperations.createList(value2);
 
-        LinkedListNode results = dataStruts.addLists(list1, list2);
+        LinkedListNode results = linkedListOperations.addLists(list1, list2);
 
         assertNotNull(results);
         for (int count = 0; count < sumInReversed.length; count++) {
@@ -221,90 +219,90 @@ public class DataStrutsTest {
     public void testIsCircularWithEmptyList() {
         LinkedListNode head = null;
 
-        boolean circular = dataStruts.isCircular(head);
+        boolean circular = linkedListOperations.isCircular(head);
         assertFalse(circular);
     }
 
     @Test
     public void testIsCircular() {
         int[] values = new int[] {1, 2, 3};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
         head = makeListCircular(head);
 
-        boolean circular = dataStruts.isCircular(head);
+        boolean circular = linkedListOperations.isCircular(head);
         assertTrue(circular);
     }
 
     @Test
     public void testFindMidOfList() {
-        assertNull(dataStruts.getMidOfLinkList(null));
+        assertNull(linkedListOperations.getMidOfLinkList(null));
     }
 
     @Test
     public void testFindMidOfCircularList() {
         int[] values = new int[] {1, 2};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
         head = makeListCircular(head);
 
-        assertNull(dataStruts.getMidOfLinkList(head));
+        assertNull(linkedListOperations.getMidOfLinkList(head));
     }
 
     @Test
     public void testFindMidOfValidOddSizedList() {
         int[] values = new int[] {1, 2, 3};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode mid = dataStruts.getMidOfLinkList(head);
+        LinkedListNode mid = linkedListOperations.getMidOfLinkList(head);
         assertEquals(values[(values.length / 2)], mid.getData());
     }
 
     @Test
     public void testFindMidOfValidEvenSizedList() {
         int[] values = new int[] {1, 2, 3, 4};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode mid = dataStruts.getMidOfLinkList(head);
+        LinkedListNode mid = linkedListOperations.getMidOfLinkList(head);
         assertEquals(values[(values.length / 2)], mid.getData());
     }
 
     @Test
     public void testListPalindromeForSingleValueList() {
-        LinkedListNode head = dataStruts.createList(1);
+        LinkedListNode head = linkedListOperations.createList(1);
 
-        assertTrue(dataStruts.isListPalindrome(head));
+        assertTrue(linkedListOperations.isListPalindrome(head));
     }
 
     @Test
     public void testListPalindromeForEmptyList() {
-        assertFalse(dataStruts.isListPalindrome(null));
+        assertFalse(linkedListOperations.isListPalindrome(null));
     }
 
     @Test
     public void testListPalindromeForEvenSizeList() {
         int[] values = new int[] {1, 2, 2, 1};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        assertTrue(dataStruts.isListPalindrome(head));
+        assertTrue(linkedListOperations.isListPalindrome(head));
 
         values = new int[] {1, 2, 2, 3};
-        head = dataStruts.createList(values);
+        head = linkedListOperations.createList(values);
 
-        assertFalse(dataStruts.isListPalindrome(head));
+        assertFalse(linkedListOperations.isListPalindrome(head));
     }
 
 
     @Test
     public void testListPalindromeForOddSizeList() {
         int[] values = new int[] {1, 2, 1};
-        LinkedListNode head = dataStruts.createList(values);
+        LinkedListNode head = linkedListOperations.createList(values);
 
-        assertTrue(dataStruts.isListPalindrome(head));
+        assertTrue(linkedListOperations.isListPalindrome(head));
 
         values = new int[] {1, 2, 2};
-        head = dataStruts.createList(values);
+        head = linkedListOperations.createList(values);
 
-        assertFalse(dataStruts.isListPalindrome(head));
+        assertFalse(linkedListOperations.isListPalindrome(head));
     }
 
     @Test
@@ -313,7 +311,7 @@ public class DataStrutsTest {
         originalStack.push(2);
         originalStack.push(4);
 
-        Stack<Integer> returnedStack = dataStruts.sortStack(originalStack);
+        Stack<Integer> returnedStack = linkedListOperations.sortStack(originalStack);
 
         Assert.assertEquals(4, returnedStack.pop().intValue());
         Assert.assertEquals(2, returnedStack.pop().intValue());
@@ -324,7 +322,7 @@ public class DataStrutsTest {
         Stack<Integer> originalStack = new Stack<Integer>();
         originalStack.push(2);
 
-        Stack<Integer> returnedStack = dataStruts.sortStack(originalStack);
+        Stack<Integer> returnedStack = linkedListOperations.sortStack(originalStack);
 
         Assert.assertEquals(2, returnedStack.pop().intValue());
     }
@@ -336,7 +334,7 @@ public class DataStrutsTest {
         originalStack.push(1);
         originalStack.push(3);
 
-        Stack<Integer> returnedStack = dataStruts.sortStack(originalStack);
+        Stack<Integer> returnedStack = linkedListOperations.sortStack(originalStack);
 
         Assert.assertEquals(3, returnedStack.pop().intValue());
         Assert.assertEquals(2, returnedStack.pop().intValue());
