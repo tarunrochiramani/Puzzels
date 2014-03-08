@@ -27,7 +27,6 @@ public class LinkedListOperations {
         return head;
     }
 
-
     public LinkedListNode spiltLinkedList(LinkedListNode node, int value) {
         LinkedListNode result = null;
 
@@ -211,30 +210,36 @@ public class LinkedListOperations {
             return false;
         }
 
-        LinkedListNode current = head;
-        LinkedListNode runner = head;
-        Stack<Integer> myStack = new Stack<Integer>();
-        while (runner != null && runner.getNext() != null) {
-            myStack.push(current.getData());
-            current = current.getNext();
-            runner = runner.getNext();
-            if (runner != null) {
-                runner = runner.getNext();
-            }
-
-            if (runner == current) {
-                return false; // circular, cannot find mid.
-            }
-        }
-
-        if (myStack.empty()) {
+        // Single Element
+        if (head.getNext() == null) {
             return true;
         }
 
-        //Odd
-        if (runner != null && runner.getNext() == null) {
-            current = current.getNext();
+        LinkedListNode current = head;
+        LinkedListNode runner = head;
+        Stack<Integer> myStack = new Stack<Integer>();
+
+        while (true) {
+            if (runner == null || runner.getNext() == null) {
+                break;
+            }
+
+            runner = runner.getNext().getNext(); //advance runner
+            if (runner != null) {
+                myStack.add(current.getData());
+                current = current.getNext();
+            }
+
+            if (runner == current) { //circular
+                return false;
+            }
         }
+
+        // Even
+        if (runner == null) {
+            myStack.add(current.getData());
+        }
+        current = current.getNext();
 
         while (current != null) {
             if (current.getData() != myStack.peek()) {
@@ -264,7 +269,40 @@ public class LinkedListOperations {
         return returnStack;
     }
 
+    public LinkedListNode removeDuplicates(LinkedListNode head) {
+        if (head == null) {
+            return null;
+        }
 
+        LinkedListNode uniqueListHead = null;
+        LinkedListNode current = head;
+        while (current != null) {
+            LinkedListNode nextNode = current.getNext();
+
+            current.setNext(null);
+            if (uniqueListHead == null) {
+                uniqueListHead = current;
+            } else {
+                LinkedListNode uniqueListCurrent = uniqueListHead;
+                while (uniqueListCurrent != null) {
+                    if (uniqueListCurrent.getData() == current.getData()) {
+                        break;
+                    }
+
+                    if (uniqueListCurrent.getNext() == null) {
+                        uniqueListCurrent.setNext(current);
+                    }
+
+                    uniqueListCurrent = uniqueListCurrent.getNext();
+                }
+
+            }
+
+            current = nextNode;
+        }
+
+        return uniqueListHead;
+    }
 
     private int addValues(int value1, int value2, int carry, LinkedListNode node){
         int sum = value1 + value2 + carry;
@@ -276,7 +314,6 @@ public class LinkedListOperations {
 
         return carry;
     }
-
 
     private LinkedListNode appendNode(LinkedListNode currentNode, LinkedListNode nodeToAdd) {
         if (currentNode == null) {

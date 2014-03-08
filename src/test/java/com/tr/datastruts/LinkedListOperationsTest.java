@@ -282,15 +282,16 @@ public class LinkedListOperationsTest {
     public void testListPalindromeForEvenSizeList() {
         int[] values = new int[] {1, 2, 2, 1};
         LinkedListNode head = linkedListOperations.createList(values);
-
         assertTrue(linkedListOperations.isListPalindrome(head));
 
-        values = new int[] {1, 2, 2, 3};
+        values = new int[] {2, 2};
         head = linkedListOperations.createList(values);
+        assertTrue(linkedListOperations.isListPalindrome(head));
 
+        values = new int[] {1, 2};
+        head = linkedListOperations.createList(values);
         assertFalse(linkedListOperations.isListPalindrome(head));
     }
-
 
     @Test
     public void testListPalindromeForOddSizeList() {
@@ -341,7 +342,62 @@ public class LinkedListOperationsTest {
         Assert.assertEquals(1, returnedStack.pop().intValue());
     }
 
+    @Test
+    public void testRemoveDuplicatesFromLinkedListWhenNull() {
+        assertNull(linkedListOperations.removeDuplicates(null));
+    }
 
+    @Test
+    public void testRemoveDuplicatedFromLinkedListWhenOnlyOneElement() {
+        int[] values = new int[] {1};
+        LinkedListNode head = linkedListOperations.createList(values);
+
+        LinkedListNode uniqueList = linkedListOperations.removeDuplicates(head);
+
+        assertNotNull(uniqueList);
+        validateUnique(uniqueList);
+    }
+
+
+    @Test
+    public void testRemoveDuplicatedFromLinkedList() {
+        int[] values = new int[] {1, 3, 4, 2, 1, 3, 4, 5};
+        LinkedListNode head = linkedListOperations.createList(values);
+
+        LinkedListNode uniqueList = linkedListOperations.removeDuplicates(head);
+
+        assertNotNull(uniqueList);
+        validateUnique(uniqueList);
+    }
+
+    @Test
+    public void testRemoveDuplicatedFromLinkedListWhenNoDuplicates() {
+        int[] values = new int[] {1, 2, 4, 5, 6, 9 ,7 ,8 };
+        LinkedListNode head = linkedListOperations.createList(values);
+
+        LinkedListNode uniqueList = linkedListOperations.removeDuplicates(head);
+
+        assertNotNull(uniqueList);
+        validateUnique(uniqueList);
+    }
+
+    private void validateUnique(LinkedListNode head) {
+        LinkedListNode current = head;
+        while (current != null) {
+            int found = 0;
+
+            LinkedListNode checker = head;
+            while (checker != null) {
+                if (checker.getData() == current.getData()) {
+                    found ++;
+                }
+                checker = checker.getNext();
+            }
+
+            assertEquals(1, found);
+            current = current.getNext();
+        }
+    }
 
     private LinkedListNode makeListCircular(LinkedListNode head) {
         if (head == null) {
