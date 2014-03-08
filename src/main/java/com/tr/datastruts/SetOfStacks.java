@@ -16,8 +16,8 @@ import java.util.Stack;
 //  specific sub-stack
 
 
-public class SetOfStacks {
-    private List<Stack<Integer>> stackList = new ArrayList<Stack<Integer>>();
+public class SetOfStacks<T> {
+    private List<Stack<T>> stackList = new ArrayList<Stack<T>>();
     private int internalStackSize = 4;
 
     public SetOfStacks() {}
@@ -26,8 +26,8 @@ public class SetOfStacks {
         this.internalStackSize = internalStackSize;
     }
 
-    public void push(Integer value) {
-        Stack<Integer> currentStack = getLastUsedStack();
+    public void push(T value) {
+        Stack<T> currentStack = getLastUsedStack();
         if (currentStack == null || currentStack.size() == internalStackSize) {
             addInternalStack();
             currentStack = getLastUsedStack();
@@ -36,13 +36,13 @@ public class SetOfStacks {
         currentStack.push(value);
     }
 
-    public Integer pop() {
-        Stack<Integer> currentStack = getLastUsedStack();
+    public T pop() {
+        Stack<T> currentStack = getLastUsedStack();
         if (currentStack == null) {
             return null;
         }
 
-        int retVal = currentStack.pop();
+        T retVal = currentStack.pop();
         if (currentStack.isEmpty()) {
             removeLastStack();
         }
@@ -50,8 +50,8 @@ public class SetOfStacks {
         return retVal;
     }
 
-    public Integer peek() {
-        Stack<Integer> currentStack = getLastUsedStack();
+    public T peek() {
+        Stack<T> currentStack = getLastUsedStack();
         if (currentStack == null) {
             return null;
         }
@@ -59,7 +59,7 @@ public class SetOfStacks {
         return currentStack.peek();
     }
 
-    Stack<Integer> getLastUsedStack() {
+    Stack<T> getLastUsedStack() {
         if (stackList.isEmpty()) {
             return null;
         }
@@ -67,11 +67,11 @@ public class SetOfStacks {
     }
 
     void addInternalStack() {
-        stackList.add(new Stack<Integer>());
+        stackList.add(new Stack<T>());
     }
 
     void removeLastStack() {
-        Stack<Integer> currentStack = getLastUsedStack();
+        Stack<T> currentStack = getLastUsedStack();
         if (currentStack != null) {
             stackList.remove(currentStack);
         }
@@ -79,7 +79,7 @@ public class SetOfStacks {
 
     public Integer size() {
         int size = 0;
-        for (Stack<Integer> stack : stackList) {
+        for (Stack<T> stack : stackList) {
             size += stack.size();
         }
 
@@ -89,7 +89,7 @@ public class SetOfStacks {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         int count = 0;
-        for (Stack<Integer> stack : stackList) {
+        for (Stack<T> stack : stackList) {
             count++;
             stringBuilder.append("Stack :" + count + " with size: " + stack.size() + " :");
             stringBuilder.append(stack.toString());
@@ -99,7 +99,7 @@ public class SetOfStacks {
         return stringBuilder.toString();
     }
 
-    public Integer popAt(int index) {
+    public T popAt(int index) {
         if (index < 0 || stackList.isEmpty() || index >= stackList.size()) {
             return null;
         }
@@ -108,15 +108,15 @@ public class SetOfStacks {
             return pop();
         }
 
-        Stack<Integer> currentStack = stackList.get(index);
-        int retVal = currentStack.pop();
+        Stack<T> currentStack = stackList.get(index);
+        T retVal = currentStack.pop();
 
         shiftStackElements(currentStack);
 
         return retVal;
     }
 
-    private void shiftStackElements(Stack<Integer> fromStack) {
+    private void shiftStackElements(Stack<T> fromStack) {
         if (fromStack == null || stackList.isEmpty()) {
             return;
         }
@@ -126,10 +126,10 @@ public class SetOfStacks {
             return;
         }
 
-        Stack<Integer> toStack = stackList.get(index + 1);
+        Stack<T> toStack = stackList.get(index + 1);
 
         // invert elements into a buffer stack
-        Stack<Integer> buffer = new Stack<Integer>();
+        Stack<T> buffer = new Stack<T>();
         while (!toStack.isEmpty()){
             buffer.push(toStack.pop());
         }
@@ -148,7 +148,7 @@ public class SetOfStacks {
 
 
     Integer getLastUsedStackNumber() {
-        Stack<Integer> lastUsedStack = getLastUsedStack();
+        Stack<T> lastUsedStack = getLastUsedStack();
         if (lastUsedStack == null) {
             return null;
         }

@@ -11,11 +11,11 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class SetOfStacksTests {
-    private SetOfStacks setOfStacks;
+    private SetOfStacks<Integer> setOfStacks;
 
     @Before
     public void setUp() {
-        setOfStacks = new SetOfStacks();
+        setOfStacks = new SetOfStacks<Integer>();
     }
 
     @Test
