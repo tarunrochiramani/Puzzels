@@ -104,6 +104,8 @@ public class LinkedListOperationsTest {
 
     @Test
     public void testGetNthNodeToLast() {
+        assertNull(linkedListOperations.getNthNodeToLast(null, 9));
+
         int[] values = new int[] {1, 2, 3, 4, 5};
         LinkedListNode head = linkedListOperations.createList(values);
 
@@ -174,8 +176,8 @@ public class LinkedListOperationsTest {
         int[] values = new int[] {1};
         int[] value2 = new int[] {9, 7, 6, 9};
         Integer[] sumInReversed = add(values, value2);
-        LinkedListNode list1 = linkedListOperations.createList(values);
-        LinkedListNode list2 = linkedListOperations.createList(value2);
+        LinkedListNode list1 = linkedListOperations.createList(value2);
+        LinkedListNode list2 = linkedListOperations.createList(values);
 
         LinkedListNode results = linkedListOperations.addLists(list1, list2);
 
@@ -227,6 +229,7 @@ public class LinkedListOperationsTest {
     public void testIsCircular() {
         int[] values = new int[] {1, 2, 3};
         LinkedListNode head = linkedListOperations.createList(values);
+        assertFalse(linkedListOperations.isCircular(head));
 
         head = makeListCircular(head);
 
@@ -274,8 +277,14 @@ public class LinkedListOperationsTest {
     }
 
     @Test
-    public void testListPalindromeForEmptyList() {
+    public void testListPalindromeForEmptyListAndCircular() {
         assertFalse(linkedListOperations.isListPalindrome(null));
+
+        int[] values = new int[] {1, 2, 3, 4};
+        LinkedListNode head = linkedListOperations.createList(values);
+        head = makeListCircular(head);
+
+        assertFalse(linkedListOperations.isListPalindrome(head));
     }
 
     @Test
@@ -308,6 +317,8 @@ public class LinkedListOperationsTest {
 
     @Test
     public void testCanSortStackWhenAlreadySorted() {
+        assertNull(linkedListOperations.sortStack(null));
+
         Stack<Integer> originalStack = new Stack<Integer>();
         originalStack.push(2);
         originalStack.push(4);

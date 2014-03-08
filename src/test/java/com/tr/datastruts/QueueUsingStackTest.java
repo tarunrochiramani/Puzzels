@@ -1,6 +1,5 @@
 package com.tr.datastruts;
 
-import com.tr.datastruts.QueueUsingStack;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -68,8 +67,5 @@ public class QueueUsingStackTest {
         assertEquals(4, myQueue.remove().intValue());
 
     }
-
-
-
 
 }
