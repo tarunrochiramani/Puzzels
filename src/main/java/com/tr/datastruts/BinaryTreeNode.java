@@ -1,3 +1,5 @@
+package com.tr.datastruts;
+
 public class BinaryTreeNode {
 
     private int value;

@@ -1,3 +1,6 @@
+package com.tr.datastruts;
+
+import com.tr.datastruts.QueueUsingStack;
 import org.junit.Before;
 import org.junit.Test;
 

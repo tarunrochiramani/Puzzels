@@ -1,3 +1,4 @@
+package com.tr.datastruts;
 
 import java.util.Stack;
 

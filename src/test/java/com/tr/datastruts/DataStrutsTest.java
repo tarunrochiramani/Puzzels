@@ -1,3 +1,7 @@
+package com.tr.datastruts;
+
+import com.tr.datastruts.DataStruts;
+import com.tr.datastruts.LinkedListNode;
 import org.junit.Assert;
 import org.junit.Test;
 

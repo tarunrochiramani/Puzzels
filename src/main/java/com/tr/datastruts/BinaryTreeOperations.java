@@ -1,3 +1,5 @@
+package com.tr.datastruts;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -109,7 +111,7 @@ public class BinaryTreeOperations {
         return head;
     }
 
-//    public Map<Integer, List<Integer>> getListForAllDepths(BinaryTreeNode head, List<Integer> buffer) {
+//    public Map<Integer, List<Integer>> getListForAllDepths(com.tr.datastruts.BinaryTreeNode head, List<Integer> buffer) {
 //        if (head == null || buffer == null) {
 //            return null;
 //        }

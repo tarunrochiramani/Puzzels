@@ -1,10 +1,10 @@
-import org.junit.Assert;
+package com.tr.datastruts;
+
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.logging.Logger;
 
 import static org.junit.Assert.assertEquals;

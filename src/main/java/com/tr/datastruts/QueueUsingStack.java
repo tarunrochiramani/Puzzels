@@ -1,3 +1,5 @@
+package com.tr.datastruts;
+
 import java.util.Stack;
 
 public class QueueUsingStack<T> {

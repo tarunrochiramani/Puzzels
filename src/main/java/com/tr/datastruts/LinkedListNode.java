@@ -1,3 +1,4 @@
+package com.tr.datastruts;
 
 public class LinkedListNode {
     private int data;
