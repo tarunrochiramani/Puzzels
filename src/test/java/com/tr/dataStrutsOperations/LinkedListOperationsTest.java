@@ -1,5 +1,7 @@
-package com.tr.datastruts;
+package com.tr.dataStrutsOperations;
 
+import com.tr.dataStrutsOperations.LinkedListOperations;
+import com.tr.datastruts.LinkedListNode;
 import org.junit.Assert;
 import org.junit.Test;
 

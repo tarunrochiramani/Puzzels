@@ -1,4 +1,6 @@
-package com.tr.datastruts;
+package com.tr.dataStrutsOperations;
+
+import com.tr.datastruts.LinkedListNode;
 
 import java.util.Stack;
 

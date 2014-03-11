@@ -1,5 +1,6 @@
-package com.tr.datastruts;
+package com.tr.dataStrutsOperations;
 
+import com.tr.datastruts.BinaryTreeNode;
 import org.junit.Test;
 
 import java.util.ArrayList;
