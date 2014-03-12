@@ -167,6 +167,7 @@ public class BinaryTreeOperationsTest {
 
         assertNotNull(results);
         assertFalse(results.isEmpty());
+        assertEquals(1, results.size());
         assertEquals(1, results.get(0).size());
 
         logger.info(results.toString());
@@ -184,7 +185,7 @@ public class BinaryTreeOperationsTest {
 
         assertNotNull(results);
         assertFalse(results.isEmpty());
-
+        assertEquals(3, results.size());
         logger.info(results.toString());
     }
 
