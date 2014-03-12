@@ -113,36 +113,6 @@ public class BinaryTreeOperations {
         return head;
     }
 
-//    public Map<Integer, List<Integer>> getListForAllDepths(com.tr.datastruts.BinaryTreeNode head, List<Integer> buffer) {
-//        if (head == null || buffer == null) {
-//            return null;
-//        }
-//
-//
-//        Map<Integer, List<Integer>> results = new HashMap<Integer, List<Integer>>();
-//        if (head.getLeft() == null && head.getRight() == null) {
-//            List<Integer> valuesList = new ArrayList<Integer>(buffer);
-//            valuesList.add(head.getValue());
-//            results.put(head.getValue(), valuesList);
-//            return results;
-//        } else {
-//            buffer.add(head.getValue());
-//        }
-//
-//        Map<Integer, List<Integer>> leftResults = getListForAllDepths(head.getLeft(), buffer);
-//        Map<Integer, List<Integer>> rightResults = getListForAllDepths(head.getRight(), buffer);
-//
-//        if (leftResults != null) {
-//            results.putAll(leftResults);
-//        }
-//
-//        if (rightResults !=null) {
-//            results.putAll(rightResults);
-//        }
-//
-//        return results;
-//    }
-
     public List<List<Integer>> getListForAllDepths(BinaryTreeNode head) {
         if (head == null) {
             return null;
@@ -188,6 +158,44 @@ public class BinaryTreeOperations {
         }
 
         return true;
+    }
+
+    public BinaryTreeNode getInorderSuccessor(BinaryTreeNode node) throws Exception {
+        if (node == null) {
+            return null;
+        }
+
+        if (node.getRight() != null) {
+            return getMin(node.getRight());
+        }
+
+        BinaryTreeNode result = null;
+        while (true) {
+            BinaryTreeNode parentNode = node.getParent();
+            if (parentNode == null) {
+                break;
+            }
+
+            if (parentNode.getLeft() == node) {
+                result = parentNode;
+                break;
+            }
+            node = parentNode;
+        }
+
+        return result;
+    }
+
+    public BinaryTreeNode getMin(BinaryTreeNode node) throws Exception {
+        if (node == null) {
+            throw new Exception("Bad Input");
+        }
+
+        while (node.getLeft() != null) {
+            node = node.getLeft();
+        }
+
+        return node;
     }
 
     private void addCurrentNodeToResults(List<List<Integer>> results, int value) {

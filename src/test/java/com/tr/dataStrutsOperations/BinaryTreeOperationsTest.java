@@ -207,4 +207,75 @@ public class BinaryTreeOperationsTest {
         assertTrue(binaryTreeOperations.isBST(null));
     }
 
+    @Test (expected = Exception.class)
+    public void testGetMinForBadInput() throws Exception {
+        binaryTreeOperations.getMin(null);
+    }
+
+    @Test
+    public void testGetMinForNoLeftTree() throws Exception {
+        BinaryTreeNode node = new BinaryTreeNode(1);
+        node.setRight(new BinaryTreeNode(2));
+
+        BinaryTreeNode minNode = binaryTreeOperations.getMin(node);
+
+        assertEquals(node, minNode);
+    }
+
+    @Test
+    public void testGetMinForValidLeftTree() throws Exception {
+        BinaryTreeNode node = new BinaryTreeNode(3);
+        BinaryTreeNode lowestNode = new BinaryTreeNode(1);
+        node.setLeft(new BinaryTreeNode(2));
+        node.getLeft().setLeft(lowestNode);
+
+        BinaryTreeNode minNode = binaryTreeOperations.getMin(node);
+
+        assertEquals(lowestNode, minNode);
+    }
+
+    @Test
+    public void testGetInorderSuccessorForBadInput() throws Exception {
+        assertNull(binaryTreeOperations.getInorderSuccessor(null));
+    }
+
+    @Test
+    public void testGetInorderSuccessorForNodeWithRightTree() throws Exception {
+        BinaryTreeNode parent = new BinaryTreeNode(8);
+        BinaryTreeNode inorderSuccessor = new BinaryTreeNode(9);
+        parent.setRight(new BinaryTreeNode(10));
+        parent.getRight().setLeft(inorderSuccessor);
+
+        BinaryTreeNode actual = binaryTreeOperations.getInorderSuccessor(parent);
+
+        assertNotNull(actual);
+        assertEquals(inorderSuccessor, actual);
+    }
+
+    @Test
+    public void testGetInorderSuccessorForNodeWithNoParentAndNoRightTree() throws Exception {
+        BinaryTreeNode parent = new BinaryTreeNode(2);
+        assertNull(binaryTreeOperations.getInorderSuccessor(parent));
+    }
+
+    @Test
+    public void testGetInorderSuccessorForNodeWithLeftParent() throws Exception {
+        BinaryTreeNode parent = new BinaryTreeNode(10);
+        BinaryTreeNode child1 = new BinaryTreeNode(8);
+
+        parent.setLeft(child1);
+        child1.setParent(parent);
+
+        BinaryTreeNode actual = binaryTreeOperations.getInorderSuccessor(child1);
+        assertEquals(parent, actual);
+
+
+        // now test node which appears on the right of its parent
+        BinaryTreeNode child2 = new BinaryTreeNode(9);
+        child1.setRight(child2);
+        child2.setParent(child1);
+        actual = binaryTreeOperations.getInorderSuccessor(child2);
+        assertEquals(parent, actual);
+    }
+
 }
