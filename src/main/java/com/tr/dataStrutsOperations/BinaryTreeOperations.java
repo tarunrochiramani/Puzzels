@@ -198,6 +198,44 @@ public class BinaryTreeOperations {
         return node;
     }
 
+    //Common Ancestor is solved for a Binary Tree NOT Binary Search Tree
+    public BinaryTreeNode getCommonAncestor(BinaryTreeNode head, BinaryTreeNode node1, BinaryTreeNode node2) {
+        if (head == null || node1 == null || node2 == null) {
+            return null;
+        }
+
+        List<BinaryTreeNode> nodes = findAncestor(head, node1, node2);
+        if (nodes.contains(node1) && nodes.contains(node2)) {
+            return nodes.get(nodes.size() -1);
+        }
+
+        return null;
+    }
+
+    // assume tree has unique node values
+    private List<BinaryTreeNode> findAncestor(BinaryTreeNode head, BinaryTreeNode node1, BinaryTreeNode node2) {
+        if (head == null) {
+            return new ArrayList<BinaryTreeNode>();
+        }
+
+        List<BinaryTreeNode> leftSearch = findAncestor(head.getLeft(), node1, node2);
+        List<BinaryTreeNode> rightSearch = findAncestor(head.getRight(), node1, node2);
+
+        leftSearch.addAll(rightSearch);
+        if (leftSearch.contains(node1) && leftSearch.contains(node2)) {
+            if (leftSearch.size() == 2) {
+                leftSearch.add(head);
+            }
+            return leftSearch;
+        }
+
+        if (head.getValue() == node1.getValue() || head.getValue() == node2.getValue()) {
+            leftSearch.add(head);
+        }
+        return leftSearch;
+    }
+
+
     private void addCurrentNodeToResults(List<List<Integer>> results, int value) {
 
         if (results == null) {
@@ -207,7 +245,6 @@ public class BinaryTreeOperations {
         for(List<Integer> result : results) {
             result.add(value);
         }
-
     }
 
     private List<List<Integer>> merge(List<List<Integer>> leftResults, List<List<Integer>> rightResults) {

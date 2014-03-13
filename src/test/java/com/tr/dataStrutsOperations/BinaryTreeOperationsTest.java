@@ -278,4 +278,85 @@ public class BinaryTreeOperationsTest {
         assertEquals(parent, actual);
     }
 
+    //Common Ancestor is solved for a Binary Tree NOT Binary Search Tree
+    @Test
+    public void testGetCommonAncestorForInvalidInputs() {
+        BinaryTreeNode node = new BinaryTreeNode(1);
+
+        assertNull(binaryTreeOperations.getCommonAncestor(null, null, null));
+        assertNull(binaryTreeOperations.getCommonAncestor(node, null, null));
+        assertNull(binaryTreeOperations.getCommonAncestor(null, node, null));
+        assertNull(binaryTreeOperations.getCommonAncestor(null, null, node));
+    }
+
+    @Test
+    public void testGetCommonAncestorForNotExistingNodes() {
+        BinaryTreeNode root = new BinaryTreeNode(1);
+        BinaryTreeNode child1 = new BinaryTreeNode(2);
+        BinaryTreeNode child2 = new BinaryTreeNode(3);
+
+        root.setLeft(new BinaryTreeNode(9));
+
+        // Root does not have child1 nor child2
+        assertNull(binaryTreeOperations.getCommonAncestor(root, child1, child2));
+
+        // Root has only child1
+        root.getLeft().setRight(child1);
+        assertNull(binaryTreeOperations.getCommonAncestor(root, child1, child2));
+
+        // Root has only child2
+        root.getLeft().setRight(child2);
+        assertNull(binaryTreeOperations.getCommonAncestor(root, child1, child2));
+    }
+
+    @Test
+    public void testGetCommonAncestorWhenChild1AndChild2AreOnSameSide() {
+        BinaryTreeNode root = new BinaryTreeNode(1);
+        BinaryTreeNode child1 = new BinaryTreeNode(2);
+        BinaryTreeNode child2 = new BinaryTreeNode(3);
+        BinaryTreeNode child3 = new BinaryTreeNode(4);
+
+        root.setRight(child1);
+        child1.setRight(child2);
+        child2.setRight(child3);
+
+        BinaryTreeNode CommonAncestor = binaryTreeOperations.getCommonAncestor(root, child2, child3);
+
+        assertNotNull(CommonAncestor);
+        assertEquals(child1, CommonAncestor);
+    }
+
+    @Test
+    public void testGetCommonAncestorWhenChild1AndChild2AreOnDifferentSide() {
+        BinaryTreeNode root = new BinaryTreeNode(1);
+        BinaryTreeNode child1 = new BinaryTreeNode(2);
+        BinaryTreeNode child2 = new BinaryTreeNode(3);
+        BinaryTreeNode child3 = new BinaryTreeNode(4);
+        BinaryTreeNode child4 = new BinaryTreeNode(5);
+
+        root.setLeft(child1);
+        root.setRight(child2);
+
+        child1.setRight(child3);
+        child2.setLeft(child4);
+
+        BinaryTreeNode CommonAncestor = binaryTreeOperations.getCommonAncestor(root, child2, child3);
+
+        assertNotNull(CommonAncestor);
+        assertEquals(root, CommonAncestor);
+
+    }
+
+    @Test
+    public void testGetCommonAncestorWhenOnlyChild1AndChild2AreInTree() {
+        BinaryTreeNode root = new BinaryTreeNode(1);
+        BinaryTreeNode child1 = new BinaryTreeNode(2);
+
+        root.setLeft(child1);
+
+        BinaryTreeNode CommonAncestor = binaryTreeOperations.getCommonAncestor(root, root, child1);
+
+        assertNotNull(CommonAncestor);
+        assertEquals(root, CommonAncestor);
+    }
 }
