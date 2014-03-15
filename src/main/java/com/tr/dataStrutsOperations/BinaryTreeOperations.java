@@ -235,6 +235,40 @@ public class BinaryTreeOperations {
         return leftSearch;
     }
 
+    public boolean isIdentical(BinaryTreeNode tree1, BinaryTreeNode tree2) {
+        if (tree1 == null && tree2 == null) {
+            return true;
+        }
+
+        if (tree1 == null || tree2 == null) {
+            return false;
+        }
+
+        if (tree1.getValue() != tree2.getValue()) {
+            return false;
+        }
+
+        return (isIdentical(tree1.getLeft(), tree2.getLeft()) && isIdentical(tree1.getRight(), tree2.getRight()));
+    }
+
+    public boolean isSubTree(BinaryTreeNode tree1, BinaryTreeNode tree2) {
+        if (tree1 == null) {
+            return false;
+        }
+
+        if (tree2 == null) {
+            return true;
+        }
+
+        if (tree1.getValue() == tree2.getValue()) {
+            if (isIdentical(tree1, tree2)) {
+                return true;
+            }
+        }
+
+        return (isSubTree(tree1.getLeft(), tree2.getLeft()) || isSubTree(tree1.getRight(), tree2.getRight()));
+    }
+
 
     private void addCurrentNodeToResults(List<List<Integer>> results, int value) {
 

@@ -359,4 +359,66 @@ public class BinaryTreeOperationsTest {
         assertNotNull(CommonAncestor);
         assertEquals(root, CommonAncestor);
     }
+
+    @Test
+    public void testIsIdenticalForValidValues() {
+        BinaryTreeNode tree1 = new BinaryTreeNode(8);
+        BinaryTreeNode tree2 = new BinaryTreeNode(8);
+
+        assertTrue(binaryTreeOperations.isIdentical(null, null));
+        assertTrue(binaryTreeOperations.isIdentical(tree1, tree2));
+
+        tree1.setLeft(new BinaryTreeNode(7));
+        tree2.setLeft(new BinaryTreeNode(7));
+        tree1.setRight(new BinaryTreeNode(9));
+        tree2.setRight(new BinaryTreeNode(9));
+
+        assertTrue(binaryTreeOperations.isIdentical(tree1, tree2));
+
+        tree1.getRight().setRight(new BinaryTreeNode(10));
+        tree2.getRight().setRight(new BinaryTreeNode(10));
+        assertTrue(binaryTreeOperations.isIdentical(tree1, tree2));
+    }
+
+    @Test
+    public void testIsIdenticalForInvalidValues() {
+        BinaryTreeNode tree1 = new BinaryTreeNode(8);
+        assertFalse(binaryTreeOperations.isIdentical(tree1, null));
+
+        BinaryTreeNode tree2 = new BinaryTreeNode(8);
+        tree2.setRight(new BinaryTreeNode(9));
+        assertFalse(binaryTreeOperations.isIdentical(tree1, null));
+    }
+
+    @Test
+    public void testSubTreeForInvalidValues() {
+        assertFalse(binaryTreeOperations.isSubTree(null, null));
+
+        BinaryTreeNode tree1 = new BinaryTreeNode(1);
+        assertTrue(binaryTreeOperations.isSubTree(tree1, null));
+
+        assertFalse(binaryTreeOperations.isSubTree(null, tree1));
+
+        BinaryTreeNode tree2 = new BinaryTreeNode(4);
+        tree2.setLeft(new BinaryTreeNode(4));
+        tree2.setRight(new BinaryTreeNode(8));
+
+        assertFalse(binaryTreeOperations.isSubTree(tree1, tree2));
+    }
+
+    @Test
+    public void testSubTreeForValidValues() {
+        BinaryTreeNode tree2 = new BinaryTreeNode(4);
+        tree2.setLeft(new BinaryTreeNode(4));
+        tree2.setRight(new BinaryTreeNode(8));
+
+        assertTrue(binaryTreeOperations.isSubTree(tree2, tree2));
+
+
+        BinaryTreeNode tree1 = new BinaryTreeNode(9);
+        tree1.setLeft(new BinaryTreeNode(4));
+        tree1.getLeft().setLeft(tree2);
+
+        assertTrue(binaryTreeOperations.isSubTree(tree1, tree2));
+    }
 }
