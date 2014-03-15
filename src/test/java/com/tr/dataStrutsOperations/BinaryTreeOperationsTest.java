@@ -421,4 +421,136 @@ public class BinaryTreeOperationsTest {
 
         assertTrue(binaryTreeOperations.isSubTree(tree1, tree2));
     }
+
+
+    @Test
+    public void testsGetAllPathsWithSumForGivenNodeWithInvalidInputs() {
+        List<List<BinaryTreeNode>> results = binaryTreeOperations.getAllPathsWithSumForGivenNode(null, 0, 0, null);
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+
+        results = binaryTreeOperations.getAllPathsWithSumForGivenNode(new BinaryTreeNode(0), 0, 0, null);
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+    }
+
+
+    @Test
+    public void canGetAllPathsWithSumForGivenNode() {
+        BinaryTreeNode root = new BinaryTreeNode(9);
+        int sum = root.getValue();
+
+        List<List<BinaryTreeNode>> results = binaryTreeOperations.getAllPathsWithSumForGivenNode(root, sum, 0, new ArrayList<BinaryTreeNode>());
+        assertNotNull(results);
+        assertFalse(results.isEmpty());
+        assertTrue(isValidResult(results, sum));
+
+        root.setLeft(new BinaryTreeNode(5));
+        root.setRight(new BinaryTreeNode(20));
+        sum = root.getValue() + root.getRight().getValue();
+
+        results = binaryTreeOperations.getAllPathsWithSumForGivenNode(root, sum, 0, new ArrayList<BinaryTreeNode>());
+        assertNotNull(results);
+        assertFalse(results.isEmpty());
+        assertTrue(isValidResult(results, sum));
+
+        root.getLeft().setRight(new BinaryTreeNode(7));
+        root.getLeft().getRight().setRight(new BinaryTreeNode(-7));
+        sum = root.getValue() + root.getLeft().getValue();
+        results = binaryTreeOperations.getAllPathsWithSumForGivenNode(root, sum, 0, new ArrayList<BinaryTreeNode>());
+        assertNotNull(results);
+        assertFalse(results.isEmpty());
+        assertTrue(isValidResult(results, sum));
+
+    }
+
+    @Test
+    public void cannotGetAllPathsWithSumForGivenNode() {
+        BinaryTreeNode root = new BinaryTreeNode(9);
+        int sum = root.getValue() + 1;
+
+        List<List<BinaryTreeNode>> results = binaryTreeOperations.getAllPathsWithSumForGivenNode(root, sum, 0, new ArrayList<BinaryTreeNode>());
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+        assertFalse(isValidResult(results, sum));
+
+        root.setLeft(new BinaryTreeNode(2));
+        root.getLeft().setRight(new BinaryTreeNode(6));
+        sum = Integer.MAX_VALUE;
+        results = binaryTreeOperations.getAllPathsWithSumForGivenNode(root, sum, 0, new ArrayList<BinaryTreeNode>());
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+        assertFalse(isValidResult(results, sum));
+    }
+
+    @Test
+    public void cannotGetAllPathsWithSum() {
+        List<List<BinaryTreeNode>> results = binaryTreeOperations.getAllPathsWithSum(null, 0);
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+        assertFalse(isValidResult(results, 0));
+
+        BinaryTreeNode root = new BinaryTreeNode(10);
+        results = binaryTreeOperations.getAllPathsWithSum(root, 0);
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+        assertFalse(isValidResult(results, 0));
+
+
+        root.setLeft(new BinaryTreeNode(-1));
+        root.setRight(new BinaryTreeNode(11));
+        results = binaryTreeOperations.getAllPathsWithSum(root, 0);
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+        assertFalse(isValidResult(results, 0));
+
+
+        root.getRight().setRight(new BinaryTreeNode(20));
+        root.getLeft().setRight(new BinaryTreeNode(8));
+        results = binaryTreeOperations.getAllPathsWithSum(root, 0);
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+        assertFalse(isValidResult(results, 0));
+    }
+
+    @Test
+    public void canGetAllPathsWithSum() {
+        BinaryTreeNode root = new BinaryTreeNode(20);
+        root.setLeft(new BinaryTreeNode(2));
+        root.setRight(new BinaryTreeNode(22));
+
+        int sum = root.getValue() + root.getLeft().getValue();
+        List<List<BinaryTreeNode>> results = binaryTreeOperations.getAllPathsWithSum(root, sum);
+        assertNotNull(results);
+        assertTrue(isValidResult(results, sum));
+
+        root.getLeft().setRight(new BinaryTreeNode(5));
+        sum = root.getLeft().getValue() + root.getLeft().getRight().getValue();
+        results = binaryTreeOperations.getAllPathsWithSum(root, sum);
+        assertNotNull(results);
+        assertTrue(isValidResult(results, sum));
+
+        root.getLeft().getRight().setRight(new BinaryTreeNode(0));
+        results = binaryTreeOperations.getAllPathsWithSum(root, sum);
+        assertNotNull(results);
+        assertTrue(isValidResult(results, sum));
+    }
+
+    private boolean isValidResult(List<List<BinaryTreeNode>> results, int sum) {
+        if (results == null || results.isEmpty()) {
+            return false;
+        }
+
+        for (List<BinaryTreeNode> resultList : results) {
+            int count = 0;
+            for (BinaryTreeNode node : resultList) {
+                count += node.getValue();
+            }
+            if (count != sum) {
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

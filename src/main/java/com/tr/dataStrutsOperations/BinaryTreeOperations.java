@@ -251,6 +251,12 @@ public class BinaryTreeOperations {
         return (isIdentical(tree1.getLeft(), tree2.getLeft()) && isIdentical(tree1.getRight(), tree2.getRight()));
     }
 
+
+//    You have two very large binary trees: Tl, with millions of nodes, and T2, with
+//    hundreds of nodes. Create an algorithm to decide ifT2 is a subtree of Tl.
+//    A tree T2 is a subtree of Tl if there exists a node n in Tl such that the subtree of
+//    n is identical to T2. That is, if you cut off the tree at node n, the two trees would
+//    be identical
     public boolean isSubTree(BinaryTreeNode tree1, BinaryTreeNode tree2) {
         if (tree1 == null) {
             return false;
@@ -267,6 +273,45 @@ public class BinaryTreeOperations {
         }
 
         return (isSubTree(tree1.getLeft(), tree2.getLeft()) || isSubTree(tree1.getRight(), tree2.getRight()));
+    }
+
+//    You are given a binary tree in which each node contains a value. Design an algorithm
+//    to get all paths which sum to a given value. The path does not need to
+//    start or end at the root or a leaf.
+    public List<List<BinaryTreeNode>> getAllPathsWithSum(BinaryTreeNode root, int sum) {
+        if (root == null) {
+            return new ArrayList<List<BinaryTreeNode>>();
+        }
+
+        List<List<BinaryTreeNode>> results = getAllPathsWithSumForGivenNode(root, sum, 0, new ArrayList<BinaryTreeNode>());
+
+        results.addAll(getAllPathsWithSum(root.getLeft(), sum));
+        results.addAll(getAllPathsWithSum(root.getRight(), sum));
+
+        return results;
+    }
+
+    public List<List<BinaryTreeNode>> getAllPathsWithSumForGivenNode(BinaryTreeNode node, int sum, int currentSum, List<BinaryTreeNode> traversalList) {
+        if (node == null || traversalList == null) {
+            return new ArrayList<List<BinaryTreeNode>>();
+        }
+
+
+        traversalList.add(node);
+        currentSum += node.getValue();
+
+        List<List<BinaryTreeNode>> leftList = getAllPathsWithSumForGivenNode(node.getLeft(), sum, currentSum, traversalList);
+        List<List<BinaryTreeNode>> rightList = getAllPathsWithSumForGivenNode(node.getRight(), sum, currentSum, traversalList);
+
+        // combine left and right results.
+        leftList.addAll(rightList);
+        if (currentSum == sum) {
+            leftList.add(new ArrayList<BinaryTreeNode>(traversalList));
+        }
+
+        traversalList.remove(node);
+
+        return leftList;
     }
 
 
