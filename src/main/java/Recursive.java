@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,5 +121,44 @@ public class Recursive {
             pointList.add(point);
             pointMoves.add(pointList);
         }
+    }
+
+    public List<String> getPermutations(String input) {
+        if (input == null || input.isEmpty()) {
+            return new ArrayList<String>();
+        }
+
+        // If there is one character, remaining string will be "", so will not get in IndexOutOfBoundException
+        char currentChar = input.charAt(0);
+        String remainingString = input.substring(1);
+
+        List<String> remainingStringPermutations = getPermutations(remainingString);
+        List<String> results = insertCharToEveryPosition(Character.toString(currentChar), remainingStringPermutations);
+
+        return results;
+    }
+
+    private List<String> insertCharToEveryPosition(String currentChar, List<String> permutations) {
+        List<String> results = new ArrayList<String>();
+
+        if (permutations.isEmpty()) {
+            results.add(currentChar);
+            return results;
+        }
+
+        for (String permutation : permutations) {
+            results.add(currentChar + permutation);
+
+            if (!permutation.isEmpty()) {
+                for (int count=1; count<=permutation.length(); count++) {
+                    String prefix = permutation.substring(0, count); //end position is excluded from result
+                    String postfix = permutation.substring(count);
+
+                    results.add(prefix + currentChar + postfix);
+                }
+            }
+        }
+
+        return results;
     }
 }

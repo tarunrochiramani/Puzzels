@@ -1,8 +1,6 @@
 import org.junit.Test;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -17,7 +15,6 @@ public class RecursiveTest {
     public void cannotFactorialNegativeNumber() throws Exception {
         recursive.factorial(-1);
     }
-
 
     @Test
     public void canFactorialNonNegativeNumber() throws Exception {
@@ -103,6 +100,48 @@ public class RecursiveTest {
         }
 
         return stringBuilder.toString();
+    }
+
+    @Test
+    public void testGetPermutationsForNullAndEmptyString() {
+        List<String> result = recursive.getPermutations(null);
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+
+        result = recursive.getPermutations("");
+        assertNotNull(result);
+        assertTrue(result.isEmpty());
+    }
+
+    @Test
+    public void testGetPermutations() throws Exception {
+        String input = "a";
+
+        List<String> permutations = recursive.getPermutations(input);
+        assertNotNull(permutations);
+        assertFalse(permutations.isEmpty());
+        assertEquals(1, permutations.size());
+        assertEquals(input, permutations.get(0));
+
+        input = "ab";
+        permutations = recursive.getPermutations(input);
+        assertNotNull(permutations);
+        assertFalse(permutations.isEmpty());
+        assertEquals(2, permutations.size());
+        assertEquals("ab", permutations.get(0));
+        assertEquals("ba", permutations.get(1));
+
+        input = "abc";
+        permutations = recursive.getPermutations(input);
+        assertNotNull(permutations);
+        assertFalse(permutations.isEmpty());
+        assertEquals(6, permutations.size());
+        assertEquals("abc", permutations.get(0));
+        assertEquals("bac", permutations.get(1));
+        assertEquals("bca", permutations.get(2));
+        assertEquals("acb", permutations.get(3));
+        assertEquals("cab", permutations.get(4));
+        assertEquals("cba", permutations.get(5));
     }
 
 }
