@@ -1,7 +1,9 @@
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 class Point {
     private int x;
@@ -18,6 +20,68 @@ class Point {
 
     public int getY() {
         return y;
+    }
+}
+
+class Parentheses {
+    public enum Braces {OPEN, CLOSE};
+
+    private List<Braces> braces = new ArrayList<Braces>();
+
+    public Parentheses() {}
+    public Parentheses(Parentheses parentheses) {
+        braces.addAll(parentheses.getBraces());
+    }
+
+    public boolean equals(Object object) {
+        if (object == null || !(object instanceof Parentheses)) {
+            return false;
+        }
+
+        Parentheses comparable = (Parentheses)object;
+        if (comparable.getBraces().size() != this.getBraces().size()) {
+            return false;
+        }
+
+        for (int count = 0; count<getBraces().size(); count++) {
+            if (!getBraces().get(count).equals(comparable.getBraces().get(count))) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public int hashCode() {
+        int counter = 0;
+        for (int count = 0; count<getBraces().size(); count++) {
+            if (getBraces().get(count).equals(Braces.OPEN)) {
+                counter ++;
+            } else {
+                counter --;
+            }
+        }
+
+        return counter;
+    }
+
+    public List<Braces> getBraces() {
+        return braces;
+    }
+
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (Braces braces : this.braces) {
+            switch (braces) {
+                case OPEN: stringBuilder.append("(");
+                    break;
+                case CLOSE: stringBuilder.append(")");
+                    break;
+            }
+        }
+
+        return stringBuilder.toString();
     }
 }
 
@@ -160,5 +224,59 @@ public class Recursive {
         }
 
         return results;
+    }
+
+    public Set<Parentheses> generateParentheses(int count) {
+        Map<Integer, Set<Parentheses>> map = new HashMap<Integer, Set<Parentheses>>();
+        generateParenthesesDP(count, map);
+
+        return map.get(count);
+    }
+
+    private void generateParenthesesDP(Integer count, Map<Integer, Set<Parentheses>> parenthesesMap) {
+        if (parenthesesMap == null || parenthesesMap.containsKey(count)) {
+            return;
+        }
+
+        Set<Parentheses> parenthesesSet;
+        if (count > 0) {
+            generateParenthesesDP(count - 1, parenthesesMap);
+            Set<Parentheses> previousCountParentheses = parenthesesMap.get(count - 1);
+
+            //insert () into the previous count's combinations
+            parenthesesSet = insertParentheses(previousCountParentheses);
+        } else {
+            parenthesesSet = new HashSet<Parentheses>();
+        }
+        parenthesesMap.put(count, parenthesesSet);
+    }
+
+    private Set<Parentheses> insertParentheses(Set<Parentheses> previousCountParentheses) {
+        Set<Parentheses> retVal = new HashSet<Parentheses>();
+        if (previousCountParentheses == null || previousCountParentheses.isEmpty()) {
+            Parentheses current = new Parentheses();
+            current.getBraces().add(Parentheses.Braces.OPEN);
+            current.getBraces().add(Parentheses.Braces.CLOSE);
+            retVal.add(current);
+            return retVal;
+        }
+
+        for (Parentheses previousParentheses : previousCountParentheses) {
+            Parentheses current = new Parentheses(previousParentheses);
+            current.getBraces().add(Parentheses.Braces.OPEN);
+            current.getBraces().add(Parentheses.Braces.CLOSE);
+            retVal.add(new Parentheses(current));
+
+            for (int count = current.getBraces().size() -1; count >0; count --) {
+                if (current.getBraces().get(count) == Parentheses.Braces.OPEN && current.getBraces().get(count-1) == Parentheses.Braces.CLOSE) {
+                    current.getBraces().set(count, Parentheses.Braces.CLOSE);
+                    current.getBraces().set(count-1, Parentheses.Braces.OPEN);
+
+                    retVal.add(new Parentheses(current));
+                }
+            }
+        }
+
+        return retVal;
     }
 }

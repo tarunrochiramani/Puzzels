@@ -1,6 +1,11 @@
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -143,5 +148,67 @@ public class RecursiveTest {
         assertEquals("cab", permutations.get(4));
         assertEquals("cba", permutations.get(5));
     }
+
+    @Test
+    public void testGenerateParenthesesForZeroOrNegative() {
+        Set<Parentheses> results = recursive.generateParentheses(-1);
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+
+        results = recursive.generateParentheses(0);
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+    }
+
+    @Test
+    public void testGenerateParenthesesForValidValues() {
+        Set<Parentheses> results = recursive.generateParentheses(1);
+        assertNotNull(results);
+        assertFalse(results.isEmpty());
+        assertEquals(1, results.size());
+        assertTrue(validateResults(results, "()"));
+
+        results = recursive.generateParentheses(2);
+        assertNotNull(results);
+        assertFalse(results.isEmpty());
+        assertEquals(2, results.size());
+        assertTrue(validateResults(results, "()()", "(())"));
+
+
+
+        results = recursive.generateParentheses(3);
+        assertNotNull(results);
+        assertFalse(results.isEmpty());
+        assertEquals(5, results.size());
+        assertTrue(validateResults(results, "()()()", "()(())", "(()())", "(())()", "((()))"));
+    }
+
+    private boolean validateResults(Set<Parentheses> results, String... expectedValues) {
+        if (expectedValues == null) {
+            return false;
+        }
+
+        Set<String> valuesToCheck = new HashSet<String>();
+        for (String value : expectedValues) {
+            valuesToCheck.add(value);
+        }
+
+        Iterator<Parentheses> iterator = results.iterator();
+        while (iterator.hasNext()) {
+            String result = iterator.next().toString();
+            if (valuesToCheck.contains(result)) {
+                valuesToCheck.remove(result);
+            } else {
+                return false;
+            }
+        }
+
+        if (!valuesToCheck.isEmpty()) {
+            return false;
+        }
+
+        return true;
+    }
+
 
 }
