@@ -3,6 +3,7 @@ package com.tr.search;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class SearchingTest {
 
@@ -33,4 +34,34 @@ public class SearchingTest {
         found = Searching.rotatedInputSearch(elements, 5);
         assertEquals(5, found);
     }
+
+    @Test
+    public void canSearchStrings() {
+        String[] strings = {"a", "b"};
+
+        int found = Searching.searchWithInterspersedString(strings, "a");
+        assertEquals(0, found);
+
+        found = Searching.searchWithInterspersedString(strings, "b");
+        assertEquals(1, found);
+
+        found = Searching.searchWithInterspersedString(strings, "c");
+        assertEquals(-1, found);
+    }
+
+    @Test
+    public void canSearchStringsWithSpaces() {
+        String[] strings = {"", "", "", "a", "", "", "", "b"};
+
+        int found = Searching.searchWithInterspersedString(strings, "a");
+        assertTrue(found > 0);
+        assertEquals(3, found);
+
+        found = Searching.searchWithInterspersedString(strings, "b");
+        assertTrue(found > 0);
+        assertEquals(7, found);
+
+        found = Searching.searchWithInterspersedString(strings, "c");
+        assertEquals(-1, found);
+     }
 }
