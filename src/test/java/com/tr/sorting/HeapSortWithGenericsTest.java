@@ -12,7 +12,7 @@ public class HeapSortWithGenericsTest {
 
     @Test
     public void testBuildHeap() {
-        HeapSortWithGenerics<Integer> heapSortWithGenerics = new HeapSortWithGenerics<>();
+        HeapSortWithGenerics<Integer> heapSortWithGenerics = new HeapSortWithGenerics<Integer>();
         Integer[] elements = {5, 3, 7, 8, 2};
         heapSortWithGenerics.buildHeap(elements);
 
@@ -32,7 +32,7 @@ public class HeapSortWithGenericsTest {
         assertFalse(Arrays.equals(expectedList, stringList));
 
         // Call implemented sort feature
-        HeapSortWithGenerics<String> stringSort = new HeapSortWithGenerics<>();
+        HeapSortWithGenerics<String> stringSort = new HeapSortWithGenerics<String>();
         stringSort.sort(stringList);
 
         // make sure both are same now

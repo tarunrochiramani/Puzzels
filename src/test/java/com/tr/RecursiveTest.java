@@ -1,7 +1,10 @@
+package com.tr;
+
+import com.tr.Parentheses;
+import com.tr.Point;
+import com.tr.Recursive;
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;

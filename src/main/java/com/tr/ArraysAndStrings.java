@@ -1,3 +1,5 @@
+package com.tr;
+
 public class ArraysAndStrings {
 
     public boolean uniqueChars(String str) {
