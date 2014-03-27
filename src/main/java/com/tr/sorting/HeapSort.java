@@ -1,6 +1,7 @@
 package com.tr.sorting;
 
-import java.util.logging.Logger;
+
+import org.apache.log4j.Logger;
 
 public class HeapSort {
 

@@ -1,10 +1,11 @@
 package com.tr.dataStrutsOperations;
 
 import com.tr.datastruts.BinaryTreeNode;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Logger;
+
 
 public class BinaryTreeOperations {
     private static Logger logger = Logger.getLogger(BinaryTreeOperations.class.getCanonicalName());
