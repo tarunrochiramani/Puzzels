@@ -63,6 +63,25 @@ public class BitwiseTest {
         assertEquals(number-2, result);
     }
 
+    @Test
+    public void testSetBitsInNumberAtPos() {
+        int result = bitwise.setBitsInNumberAtPos(4, 1, 0, 1);
+        assertEquals(-1, result);
+
+        result = bitwise.setBitsInNumberAtPos(4, 4, 2, 1);
+        assertEquals(-1, result);
+
+        result = bitwise.setBitsInNumberAtPos(4, 1, 1, 0);
+        assertEquals(5, result);
+
+        result = bitwise.setBitsInNumberAtPos(9, 3, 2, 1);
+        assertEquals(15, result);
+
+        result = bitwise.setBitsInNumberAtPos(11, 3, 2, 1);
+        assertEquals(15, result);
+
+    }
+
 
 
 

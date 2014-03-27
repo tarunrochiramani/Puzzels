@@ -27,4 +27,36 @@ public class Bitwise {
 
         return (number &= mask);
     }
+
+    public int setBitsInNumberAtPos(int source, int destination, int msbPosition, int lsbPosition) {
+        if (source == destination) {
+            return -1;
+        }
+
+        if (msbPosition <= lsbPosition) {
+            return -1;
+        }
+
+        // clear the bits between start and end in source
+        int allOnes = ~(0);
+        int msbMask = allOnes << msbPosition;
+        logger.info("msb mask : " + Integer.toBinaryString(msbMask));
+
+        int lsbMask = (1 << lsbPosition) - 1;
+        logger.info("lsb mask : " + Integer.toBinaryString(lsbMask));
+
+        int mask = msbMask | lsbMask;
+        logger.info("mask : " + Integer.toBinaryString(mask));
+
+        int result = source & mask;
+        logger.info("Source: " + Integer.toBinaryString(source));
+        logger.info("Clear bits of source: " + Integer.toBinaryString(result));
+
+        // Shift destination to fit in between msb and lsb
+        int shiftedDestination = destination << lsbPosition;
+        logger.info("Desitation: " + Integer.toBinaryString(destination));
+        logger.info("Shifted destination: " + Integer.toBinaryString(shiftedDestination));
+
+        return (result |= shiftedDestination);
+    }
 }
