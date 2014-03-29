@@ -1,6 +1,10 @@
 package com.tr;
 
+import org.apache.log4j.Logger;
+
 public class ArraysAndStrings {
+
+    private static Logger logger = Logger.getLogger(ArraysAndStrings.class);
 
     public boolean uniqueChars(String str) {
         if (str == null || str.length() == 0) {
@@ -55,6 +59,10 @@ public class ArraysAndStrings {
             return false;
         }
 
+        if (str1.isEmpty() || str2.isEmpty()) {
+            return false;
+        }
+
         try {
             if (bitManupilation(str1.toLowerCase()) == bitManupilation(str2.toUpperCase())) {
                 return true;
@@ -75,6 +83,8 @@ public class ArraysAndStrings {
         for (char c : str.toCharArray()) {
             result |= (1 << c);
         }
+
+        logger.info("String: " + str + " Binary representation: " + Integer.toBinaryString(result));
 
         return result;
     }

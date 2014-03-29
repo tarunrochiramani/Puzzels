@@ -80,8 +80,11 @@ public class ArraysAndStringsTest {
 
         result = arraysAndStrings.checkAnagram(null, null);
         assertFalse(result);
+    }
 
-        result = arraysAndStrings.checkAnagram("blah", "b");
+    @Test
+    public void testAnagramsForFalseCases() {
+        boolean result = arraysAndStrings.checkAnagram("blah", "b");
         assertFalse(result);
 
         result = arraysAndStrings.checkAnagram("blah", "blah      ");
@@ -90,7 +93,13 @@ public class ArraysAndStringsTest {
         result = arraysAndStrings.checkAnagram("", "");
         assertFalse(result);
 
-        result = arraysAndStrings.checkAnagram("blah", "hlba");
+        result = arraysAndStrings.checkAnagram("abcd", "efgh");
+        assertFalse(result);
+    }
+
+    @Test
+    public void testAnagramsForTrueCases() {
+        boolean result = arraysAndStrings.checkAnagram("blah", "hlba");
         assertTrue(result);
 
         result = arraysAndStrings.checkAnagram("blah", "hlbA");
