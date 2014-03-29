@@ -165,4 +165,25 @@ public class ArraysAndStringsTest {
         String input = "aabccddddeff";
         assertEquals("a2bc2d4ef2", arraysAndStrings.compressString(input));
     }
+
+    @Test
+    public void testIsSubstringForInvalidValues() {
+        assertEquals(-1, arraysAndStrings.isSubstring(null, null));
+        assertEquals(-1, arraysAndStrings.isSubstring(null, "abc"));
+        assertEquals(-1, arraysAndStrings.isSubstring("abc", null));
+        assertEquals(-1, arraysAndStrings.isSubstring("", ""));
+        assertEquals(-1, arraysAndStrings.isSubstring("", "abc"));
+        assertEquals(-1, arraysAndStrings.isSubstring("abc", ""));
+        assertEquals(-1, arraysAndStrings.isSubstring("efg", "abc"));
+    }
+
+    @Test
+    public void testIsSubstringForValidValues() {
+        int position = arraysAndStrings.isSubstring("abcdefghi", "cde");
+        assertEquals(2, position);
+
+
+        position = arraysAndStrings.isSubstring("abccdefghi", "cde");
+        assertEquals(3, position);
+    }
 }

@@ -155,4 +155,38 @@ public class ArraysAndStrings {
 
         return stringBuilder.toString();
     }
+
+    public int isSubstring(String text, String pattern) {
+        if (text == null || pattern == null) {
+            return -1;
+        }
+
+        if (text.isEmpty() || pattern.isEmpty()) {
+            return -1;
+        }
+
+        char[] textArray = text.toCharArray();
+        char[] patternArray = pattern.toCharArray();
+
+        for (int count = 0; count < textArray.length; count++) {
+            if (textArray[count] == patternArray[0]) {
+                int textCount = count;
+                int patternCount;
+                for (patternCount = 1; patternCount < patternArray.length; patternCount++) {
+                    textCount++;
+                    if (textArray[textCount] != patternArray[patternCount]) {
+                        break;
+                    }
+
+                }
+
+                if (patternCount == patternArray.length) {
+                    return count;
+                }
+            }
+        }
+
+        return -1;
+    }
+
 }
