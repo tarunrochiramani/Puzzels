@@ -186,4 +186,24 @@ public class ArraysAndStringsTest {
         position = arraysAndStrings.isSubstring("abccdefghi", "cde");
         assertEquals(3, position);
     }
+
+    @Test
+    public void testSubstringAndAnagramForInvalidValues() {
+        assertFalse(arraysAndStrings.checkSubstringAndAnagram(null, null));
+        assertFalse(arraysAndStrings.checkSubstringAndAnagram(null, "abc"));
+        assertFalse(arraysAndStrings.checkSubstringAndAnagram("abc", null));
+        assertFalse(arraysAndStrings.checkSubstringAndAnagram("", ""));
+        assertFalse(arraysAndStrings.checkSubstringAndAnagram("abc", ""));
+        assertFalse(arraysAndStrings.checkSubstringAndAnagram("", "abc"));
+        assertFalse(arraysAndStrings.checkSubstringAndAnagram("de", "abc"));
+        assertFalse(arraysAndStrings.checkSubstringAndAnagram("defghijks", "abc"));
+    }
+
+    @Test
+    public void testSubstringAndAnagramForValidValues() {
+        assertTrue(arraysAndStrings.checkSubstringAndAnagram("abcdefijklm", "def"));
+        assertTrue(arraysAndStrings.checkSubstringAndAnagram("abcdefijklm", "edf"));
+        assertTrue(arraysAndStrings.checkSubstringAndAnagram("abcdefijklm", "efd"));
+        assertTrue(arraysAndStrings.checkSubstringAndAnagram("abcdefijklm", "fde"));
+    }
 }

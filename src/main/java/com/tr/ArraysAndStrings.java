@@ -189,4 +189,29 @@ public class ArraysAndStrings {
         return -1;
     }
 
+    public boolean checkSubstringAndAnagram(String text, String pattern) {
+        if (text == null || pattern == null) {
+            return false;
+        }
+
+        if (text.isEmpty() || pattern.isEmpty()) {
+            return false;
+        }
+
+        if (text.length() < pattern.length()) {
+            return false;
+        }
+
+        char[] patternArray = pattern.toCharArray();
+
+        for (int count = 0, runner = count + patternArray.length; runner <= text.length(); count++, runner++) {
+            String subStr = text.substring(count, runner);
+            if (checkAnagram(subStr, pattern)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 }
