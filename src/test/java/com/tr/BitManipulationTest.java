@@ -1,16 +1,15 @@
 package com.tr;
 
 import org.apache.log4j.Logger;
-import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class BitwiseTest {
-    private static final Logger logger = Logger.getLogger(BitwiseTest.class.getName());
+public class BitManipulationTest {
+    private static final Logger logger = Logger.getLogger(BitManipulationTest.class.getName());
 
-    private Bitwise bitwise = new Bitwise();
+    private BitManipulation bitManipulation = new BitManipulation();
 
     @Test public void printBinaryStr() {
         logger.info("1 << 4 -> " + Integer.toBinaryString(1 << 4));
@@ -21,7 +20,7 @@ public class BitwiseTest {
 
     @Test
     public void testBinaryRepresentation() {
-        String binaryStr = bitwise.getBinaryRepresentation(4);
+        String binaryStr = bitManipulation.getBinaryRepresentation(4);
         assertNotNull(binaryStr);
         logger.info(binaryStr);
     }
@@ -29,26 +28,26 @@ public class BitwiseTest {
     @Test
     public void testGetBit() {
         int n = 4;
-        int bit = bitwise.getBit(n, 0);
+        int bit = bitManipulation.getBit(n, 0);
         assertEquals(0, bit);
 
-        bit = bitwise.getBit(n, 1);
+        bit = bitManipulation.getBit(n, 1);
         assertEquals(0, bit);
 
-        bit = bitwise.getBit(n, 2);
+        bit = bitManipulation.getBit(n, 2);
         assertEquals(1, bit);
 
-        bit = bitwise.getBit(n, 3);
+        bit = bitManipulation.getBit(n, 3);
         assertEquals(0, bit);
     }
 
     @Test
     public void testSetBit() {
         int n = 4;
-        int bit = bitwise.setBit(n, 0);
+        int bit = bitManipulation.setBit(n, 0);
         assertEquals(n + 1, bit);
 
-        bit = bitwise.setBit(n, 1);
+        bit = bitManipulation.setBit(n, 1);
         assertEquals(n + 2, bit);
     }
 
@@ -56,28 +55,28 @@ public class BitwiseTest {
     public void testClearBit() {
         int number = 7;
 
-        int result = bitwise.clearBit(number, 0);
+        int result = bitManipulation.clearBit(number, 0);
         assertEquals(number-1, result);
 
-        result = bitwise.clearBit(number, 1);
+        result = bitManipulation.clearBit(number, 1);
         assertEquals(number-2, result);
     }
 
     @Test
     public void testSetBitsInNumberAtPos() {
-        int result = bitwise.setBitsInNumberAtPos(4, 1, 0, 1);
+        int result = bitManipulation.setBitsInNumberAtPos(4, 1, 0, 1);
         assertEquals(-1, result);
 
-        result = bitwise.setBitsInNumberAtPos(4, 4, 2, 1);
+        result = bitManipulation.setBitsInNumberAtPos(4, 4, 2, 1);
         assertEquals(-1, result);
 
-        result = bitwise.setBitsInNumberAtPos(4, 1, 1, 0);
+        result = bitManipulation.setBitsInNumberAtPos(4, 1, 1, 0);
         assertEquals(5, result);
 
-        result = bitwise.setBitsInNumberAtPos(9, 3, 2, 1);
+        result = bitManipulation.setBitsInNumberAtPos(9, 3, 2, 1);
         assertEquals(15, result);
 
-        result = bitwise.setBitsInNumberAtPos(11, 3, 2, 1);
+        result = bitManipulation.setBitsInNumberAtPos(11, 3, 2, 1);
         assertEquals(15, result);
 
     }

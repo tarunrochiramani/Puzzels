@@ -2,8 +2,8 @@ package com.tr;
 
 import org.apache.log4j.Logger;
 
-public class Bitwise {
-    private static final Logger logger = Logger.getLogger(Bitwise.class.getName());
+public class BitManipulation {
+    private static final Logger logger = Logger.getLogger(BitManipulation.class.getName());
 
     public String getBinaryRepresentation(int number) {
         return Integer.toBinaryString(number);
