@@ -1,6 +1,5 @@
 package com.tr;
 
-import com.tr.ArraysAndStrings;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

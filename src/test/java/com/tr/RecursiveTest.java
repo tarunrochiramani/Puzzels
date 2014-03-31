@@ -1,8 +1,5 @@
 package com.tr;
 
-import com.tr.Parentheses;
-import com.tr.Point;
-import com.tr.Recursive;
 import org.junit.Test;
 
 import java.util.HashSet;

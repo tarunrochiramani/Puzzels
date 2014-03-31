@@ -1,6 +1,7 @@
 package com.tr.thread;
 
 import org.apache.log4j.Logger;
+
 import java.util.Queue;
 
 public class Producer<E> {

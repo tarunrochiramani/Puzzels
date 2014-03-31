@@ -1,6 +1,5 @@
 package com.tr;
 
-import com.tr.SerializableSample;
 import junit.framework.Assert;
 import org.junit.Test;
 
