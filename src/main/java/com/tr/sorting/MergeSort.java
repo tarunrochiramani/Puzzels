@@ -26,12 +26,12 @@ public class MergeSort {
    }
 
     private <T extends Comparable> void mergeResults(T[] elements, int start, int mid, int end) {
-        List<T> leftList = new ArrayList<T>();
+        List<T> leftList = new ArrayList<>();
         for (int count = start; count <=mid; count ++) {
             leftList.add(elements[count]);
         }
 
-        List<T> rightList = new ArrayList<T>();
+        List<T> rightList = new ArrayList<>();
         for (int count= mid+1; count<=end; count++) {
             rightList.add(elements[count]);
         }

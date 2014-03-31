@@ -28,7 +28,7 @@ class Point {
 class Parentheses {
     public enum Braces {OPEN, CLOSE};
 
-    private List<Braces> braces = new ArrayList<Braces>();
+    private List<Braces> braces = new ArrayList<>();
 
     public Parentheses() {}
     public Parentheses(Parentheses parentheses) {
@@ -182,7 +182,7 @@ public class Recursive {
 
     private void addResults(Point point, List<List<Point>> previousStepResults, List<List<Point>> pointMoves) {
         for (List<Point> result : previousStepResults) {
-            List<Point> pointList = new ArrayList<Point>();
+            List<Point> pointList = new ArrayList<>();
             pointList.addAll(result);
             pointList.add(point);
             pointMoves.add(pointList);
@@ -191,7 +191,7 @@ public class Recursive {
 
     public List<String> getPermutations(String input) {
         if (input == null || input.isEmpty()) {
-            return new ArrayList<String>();
+            return new ArrayList<>();
         }
 
         // If there is one character, remaining string will be "", so will not get in IndexOutOfBoundException
