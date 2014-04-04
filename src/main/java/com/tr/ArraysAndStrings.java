@@ -2,6 +2,9 @@ package com.tr;
 
 import org.apache.log4j.Logger;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ArraysAndStrings {
 
     private static Logger logger = Logger.getLogger(ArraysAndStrings.class);
@@ -212,6 +215,18 @@ public class ArraysAndStrings {
         }
 
         return false;
+    }
+
+
+    public boolean charCheckRegex(char input, String regex) {
+        if (regex == null || regex.isEmpty()) {
+            return false;
+        }
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(Character.toString(input));
+
+        return matcher.matches();
     }
 
 }

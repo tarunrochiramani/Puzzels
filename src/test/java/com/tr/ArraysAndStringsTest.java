@@ -205,4 +205,19 @@ public class ArraysAndStringsTest {
         assertTrue(arraysAndStrings.checkSubstringAndAnagram("abcdefijklm", "efd"));
         assertTrue(arraysAndStrings.checkSubstringAndAnagram("abcdefijklm", "fde"));
     }
+
+    @Test
+    public void testCharCheckRegex() {
+        String input = "ab d";
+        int spacesFound = 0;
+        for (char c : input.toCharArray()) {
+            System.out.println("Char: " + c);
+            if (arraysAndStrings.charCheckRegex(c, "\\s")) {
+                spacesFound++;
+            }
+        }
+
+        assertTrue(spacesFound > 0);
+        assertEquals(1, spacesFound);
+    }
 }
