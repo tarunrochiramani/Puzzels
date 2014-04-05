@@ -1,5 +1,8 @@
 package com.tr.search;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Searching {
 
     public static <T extends Comparable> int binarySearch(T[] elements, T searchElement) {
@@ -106,4 +109,34 @@ public class Searching {
         return -1;
     }
 
+    public static List<String> getPairs(List<Integer> input, int sum) {
+        List<String> results = new ArrayList<>();
+        if (input == null || input.isEmpty()) {
+            return results;
+        }
+
+        int start = 0;
+        int end = input.size() -1;
+
+        while (start < end) {
+            int currentSum = input.get(start) + input.get(end);
+            if (currentSum == sum) {
+                results.add(input.get(start) + "," + input.get(end));
+                if (input.get(start).equals(input.get(start + 1))) {
+                    start ++;
+                } else if (input.get(end).equals(input.get(end -1))) {
+                    end--;
+                } else {
+                    start++;
+                    end--;
+                }
+            } else if (currentSum > sum) {
+                end--;
+            } else {
+                start++;
+            }
+        }
+
+        return results;
+    }
 }
