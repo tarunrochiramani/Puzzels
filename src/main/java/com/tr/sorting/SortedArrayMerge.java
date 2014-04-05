@@ -13,18 +13,10 @@ public class SortedArrayMerge {
             throw new Exception("Bad Input");
         }
 
-        int lastA = 1;
-        while (true) {
-            if (arrayA[lastA] <= 0) {
-                lastA--;
-                break;
-            } else {
-                lastA++;
-            }
-        }
-        int lastB = arrayB.length-1;
+        int lastA = arrayA.length - arrayB.length - 1;
+        int lastB = arrayB.length - 1;
 
-        int insertPoint = arrayA.length -1;
+        int insertPoint = arrayA.length - 1;
         while (lastA>=0 && lastB>=0) {
             if (arrayA[lastA] > arrayB[lastB]) {
                 arrayA[insertPoint--] = arrayA[lastA--];
