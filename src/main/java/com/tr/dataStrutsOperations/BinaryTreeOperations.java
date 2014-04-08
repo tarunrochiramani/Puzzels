@@ -4,6 +4,7 @@ import com.tr.datastruts.BinaryTreeNode;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 
@@ -339,5 +340,35 @@ public class BinaryTreeOperations {
         leftResults.addAll(rightResults);
 
         return leftResults;
+    }
+
+    public List<List<BinaryTreeNode>> getNodeListAtDepths(BinaryTreeNode root) {
+        if (root == null) {
+            return null;
+        }
+
+        List<List<BinaryTreeNode>> results = new ArrayList<>();
+        LinkedList<BinaryTreeNode> bfsQueue = new LinkedList<>();
+        bfsQueue.add(root);
+
+        while (!bfsQueue.isEmpty()) {
+
+            List<BinaryTreeNode> resultAtDepth = new ArrayList<>();
+            resultAtDepth.addAll(bfsQueue);
+            results.add(resultAtDepth);
+            bfsQueue.clear();
+
+            for (int count =0; count<resultAtDepth.size(); count++) {
+                BinaryTreeNode currentNode = resultAtDepth.get(count);
+                if (currentNode.getLeft() != null) {
+                    bfsQueue.add(currentNode.getLeft());
+                }
+                if (currentNode.getRight() != null) {
+                    bfsQueue.add(currentNode.getRight());
+                }
+            }
+        }
+
+        return results;
     }
 }

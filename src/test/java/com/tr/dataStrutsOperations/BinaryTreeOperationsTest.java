@@ -553,4 +553,40 @@ public class BinaryTreeOperationsTest {
 
         return true;
     }
+
+    @Test
+    public void canGetNodeListAtAllDepths() {
+        BinaryTreeNode root = new BinaryTreeNode(4);
+        BinaryTreeNode level1Child1 = new BinaryTreeNode(2);
+        root.setLeft(level1Child1);
+        BinaryTreeNode level1Child2 = new BinaryTreeNode(7);
+        root.setRight(level1Child2);
+
+        BinaryTreeNode level2child1 = new BinaryTreeNode(1);
+        level1Child1.setLeft(level2child1);
+        BinaryTreeNode level2child2 = new BinaryTreeNode(3);
+        level1Child1.setRight(level2child2);
+        BinaryTreeNode level2child3 = new BinaryTreeNode(5);
+        level1Child2.setLeft(level2child3);
+
+        BinaryTreeNode level3Child1 = new BinaryTreeNode(6);
+        level2child3.setRight(level3Child1);
+
+        List<List<BinaryTreeNode>> results = binaryTreeOperations.getNodeListAtDepths(root);
+        assertTrue(results.size() == 4);
+        assertTrue(results.get(0).size() == 1);
+        assertTrue(results.get(0).contains(root));
+
+        assertTrue(results.get(1).size() == 2);
+        assertTrue(results.get(1).contains(level1Child1));
+        assertTrue(results.get(1).contains(level1Child2));
+
+        assertTrue(results.get(2).size() == 3);
+        assertTrue(results.get(2).contains(level2child1));
+        assertTrue(results.get(2).contains(level2child2));
+        assertTrue(results.get(2).contains(level2child3));
+
+        assertTrue(results.get(3).size() == 1);
+        assertTrue(results.get(3).contains(level3Child1));
+    }
 }
