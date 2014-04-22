@@ -220,4 +220,24 @@ public class ArraysAndStringsTest {
         assertTrue(spacesFound > 0);
         assertEquals(1, spacesFound);
     }
+
+    @Test
+    public void testReverseStringWithNumbersInPlaceForInvalidInputs() {
+        String input = null;
+        assertNull(arraysAndStrings.reverseStringWithNumbersInPlace(input));
+
+        input = "";
+        assertEquals(input, arraysAndStrings.reverseStringWithNumbersInPlace(input));
+
+        input = "abc";
+        assertEquals("cba", arraysAndStrings.reverseStringWithNumbersInPlace(input));
+    }
+
+    @Test
+    public void testReverseStringWithNumbersInPlace() {
+        String input = "ab2cde3f";
+        String expectedOutput = "fe2dcb3a";
+
+        assertEquals(expectedOutput, arraysAndStrings.reverseStringWithNumbersInPlace(input));
+    }
 }

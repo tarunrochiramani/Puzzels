@@ -229,4 +229,33 @@ public class ArraysAndStrings {
         return matcher.matches();
     }
 
+    public String reverseStringWithNumbersInPlace(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
+        char[] chars = input.toCharArray();
+        int start = 0;
+        int end = input.length()-1;
+        while (start < end) {
+            if (charCheckRegex(chars[start], "[0-9]")) {
+                start++;
+                continue;
+            }
+
+            if (charCheckRegex(chars[end], "[0-9]")) {
+                end--;
+                continue;
+            }
+
+            char tempChar = chars[start];
+            chars[start] = chars[end];
+            chars[end] = tempChar;
+
+            start++;
+            end--;
+        }
+
+        return new String(chars);
+    }
 }
