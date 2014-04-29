@@ -258,4 +258,21 @@ public class ArraysAndStrings {
 
         return new String(chars);
     }
+
+    public String processString(String url, String replaceValue) {
+        String regex = "\\{(.)*\\}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(url);
+
+        int lastEnd = 0;
+        StringBuilder stringBuilder = new StringBuilder();
+        while (matcher.find()) {
+            int start = matcher.start();
+            stringBuilder.append(url.substring(lastEnd, start));
+            stringBuilder.append(replaceValue);
+            lastEnd = matcher.end();
+        }
+        stringBuilder.append(url.substring(lastEnd));
+        return stringBuilder.toString();
+    }
 }

@@ -240,4 +240,14 @@ public class ArraysAndStringsTest {
 
         assertEquals(expectedOutput, arraysAndStrings.reverseStringWithNumbersInPlace(input));
     }
+
+    @Test
+    public void testCanProcessString() {
+        String input = "abc/{def}";
+
+        assertEquals("abc/abc", arraysAndStrings.processString(input, "abc"));
+
+        input = "abc";
+        assertEquals(input, arraysAndStrings.processString(input, "def"));
+    }
 }
