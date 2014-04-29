@@ -260,7 +260,7 @@ public class ArraysAndStrings {
     }
 
     public String processString(String url, String replaceValue) {
-        String regex = "\\{(.)*\\}";
+        String regex = "\\{(.)+?\\}";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(url);
 

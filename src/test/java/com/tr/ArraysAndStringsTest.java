@@ -249,5 +249,8 @@ public class ArraysAndStringsTest {
 
         input = "abc";
         assertEquals(input, arraysAndStrings.processString(input, "def"));
+
+        input = "abc/{def}/{ghi}/def";
+        assertEquals("abc/abc/abc/def", arraysAndStrings.processString(input, "abc"));
     }
 }
