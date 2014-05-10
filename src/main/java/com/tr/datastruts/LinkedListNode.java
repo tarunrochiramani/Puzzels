@@ -19,4 +19,20 @@ public class LinkedListNode {
     public void setNext(LinkedListNode next) {
         this.next = next;
     }
+
+    public boolean equals(Object o) {
+        if (! (o instanceof LinkedListNode)) {
+            return false;
+        }
+
+        if (this.data == ((LinkedListNode)o).getData()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public int hashCode() {
+        return data % 31;
+    }
 }

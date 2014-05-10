@@ -2,6 +2,8 @@ package com.tr.dataStrutsOperations;
 
 import com.tr.datastruts.LinkedListNode;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Stack;
 
 public class LinkedListOperations {
@@ -271,7 +273,7 @@ public class LinkedListOperations {
         return returnStack;
     }
 
-    public LinkedListNode removeDuplicates(LinkedListNode head) {
+    public LinkedListNode removeDuplicatesWithoutAdditionalBuffer(LinkedListNode head) {
         if (head == null) {
             return null;
         }
@@ -304,6 +306,27 @@ public class LinkedListOperations {
         }
 
         return uniqueListHead;
+    }
+
+    public LinkedListNode removeDuplicatesWithBuffer(LinkedListNode head) {
+        if (head == null) {
+            return null;
+        }
+
+        Set<LinkedListNode> buffer = new HashSet<>();
+        LinkedListNode current = head;
+        LinkedListNode previous = null;
+        while (current != null) {
+            if (buffer.contains(current)) {
+                previous.setNext(current.getNext());
+            } else {
+                buffer.add(current);
+                previous = current;
+            }
+            current = current.getNext();
+        }
+
+        return head;
     }
 
     private int addValues(int value1, int value2, int carry, LinkedListNode node){

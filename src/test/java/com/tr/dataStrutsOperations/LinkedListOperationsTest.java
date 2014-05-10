@@ -356,7 +356,7 @@ public class LinkedListOperationsTest {
 
     @Test
     public void testRemoveDuplicatesFromLinkedListWhenNull() {
-        assertNull(linkedListOperations.removeDuplicates(null));
+        assertNull(linkedListOperations.removeDuplicatesWithoutAdditionalBuffer(null));
     }
 
     @Test
@@ -364,7 +364,7 @@ public class LinkedListOperationsTest {
         int[] values = new int[] {1};
         LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode uniqueList = linkedListOperations.removeDuplicates(head);
+        LinkedListNode uniqueList = linkedListOperations.removeDuplicatesWithoutAdditionalBuffer(head);
 
         assertNotNull(uniqueList);
         validateUnique(uniqueList);
@@ -376,7 +376,13 @@ public class LinkedListOperationsTest {
         int[] values = new int[] {1, 3, 4, 2, 1, 3, 4, 5};
         LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode uniqueList = linkedListOperations.removeDuplicates(head);
+        LinkedListNode uniqueList = linkedListOperations.removeDuplicatesWithoutAdditionalBuffer(head);
+
+        assertNotNull(uniqueList);
+        validateUnique(uniqueList);
+
+        head = linkedListOperations.createList(values);
+        uniqueList = linkedListOperations.removeDuplicatesWithBuffer(head);
 
         assertNotNull(uniqueList);
         validateUnique(uniqueList);
@@ -387,8 +393,13 @@ public class LinkedListOperationsTest {
         int[] values = new int[] {1, 2, 4, 5, 6, 9 ,7 ,8 };
         LinkedListNode head = linkedListOperations.createList(values);
 
-        LinkedListNode uniqueList = linkedListOperations.removeDuplicates(head);
+        LinkedListNode uniqueList = linkedListOperations.removeDuplicatesWithoutAdditionalBuffer(head);
 
+        assertNotNull(uniqueList);
+        validateUnique(uniqueList);
+
+        head = linkedListOperations.createList(values);
+        uniqueList = linkedListOperations.removeDuplicatesWithBuffer(head);
         assertNotNull(uniqueList);
         validateUnique(uniqueList);
     }
