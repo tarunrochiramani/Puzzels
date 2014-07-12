@@ -275,4 +275,24 @@ public class ArraysAndStrings {
         stringBuilder.append(url.substring(lastEnd));
         return stringBuilder.toString();
     }
+
+    public String removeDuplicateChars(String input) {
+        if (input == null || input.isEmpty()) {
+            return input;
+        }
+
+        char[] characters = input.toCharArray();
+        StringBuilder stringBuilder = new StringBuilder();
+        int checker = 0;
+        for (char character : characters) {
+            int rightShiftedValue = 1 << character - 'a';
+            if ((checker & rightShiftedValue) > 0) {
+                continue;
+            }
+            checker |= rightShiftedValue;
+            stringBuilder.append(character);
+        }
+
+        return stringBuilder.toString();
+    }
 }

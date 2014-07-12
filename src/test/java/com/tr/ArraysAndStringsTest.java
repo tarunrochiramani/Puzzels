@@ -253,4 +253,22 @@ public class ArraysAndStringsTest {
         input = "abc/{def}/{ghi}/def";
         assertEquals("abc/abc/abc/def", arraysAndStrings.processString(input, "abc"));
     }
+
+    @Test
+    public void canRemoveDuplicates() {
+        String input = "abracadabra";
+
+        String result = arraysAndStrings.removeDuplicateChars(input);
+
+        assertEquals("abrcd", result);
+    }
+
+    @Test
+    public void canHandleUniqueCharsWhenRemoveDuplicates() {
+        String input = "abcd";
+
+        String result = arraysAndStrings.removeDuplicateChars(input);
+
+        assertEquals(input, result);
+    }
 }
