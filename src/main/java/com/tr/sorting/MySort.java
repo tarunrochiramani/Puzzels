@@ -10,7 +10,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class MySort {
-
     public <T> void sortBasedOnPosition(List<T> listToSort, final List<T> listToRefer) {
         class MyComparator implements Comparator<T> {
             @Override
@@ -22,5 +21,33 @@ public class MySort {
             }
         }
         Collections.sort(listToSort, new MyComparator());
+    }
+
+    /**
+     * Rearrange the array elements such that all odd numbers are on the left and even on the right.
+     */
+    public int[] rearrangeElements(int[] array){
+        if (array == null || array.length <= 1) {
+            return array;
+        }
+
+        int start = 0;
+        int end = array.length -1;
+        while (start < end) {
+            if (array[start] %2 !=0) {
+                start++;
+                continue;
+            }
+
+            if (array[end] %2 == 0) {
+                end--;
+                continue;
+            }
+
+            int temp=array[start];
+            array[start] = array[end];
+            array[end] = temp;
+        }
+        return array;
     }
 }
