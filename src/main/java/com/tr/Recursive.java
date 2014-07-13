@@ -281,4 +281,64 @@ public class Recursive {
 
         return retVal;
     }
+
+    public List<String> getSubsets(String input) {
+        if (input == null) {
+            return new ArrayList<>();
+        }
+
+        List<List<Character>> subsets = getSubsetsHelper(input, 0);
+
+        List<String> result = prepareResult(subsets);
+        return result;
+    }
+
+    private List<String> prepareResult(List<List<Character>> subsets) {
+        List<String> results = new ArrayList<>();
+
+        if (subsets == null || subsets.isEmpty()) {
+            return results;
+        }
+
+        for (List<Character> characterList : subsets) {
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append("{");
+
+            int size = characterList.size();
+            for (int count = 0; count<size; count++) {
+                stringBuilder.append(characterList.get(count));
+                if (count+1 != size) {
+                    stringBuilder.append(", ");
+                }
+            }
+            stringBuilder.append("}");
+            results.add(stringBuilder.toString());
+        }
+        return results;
+    }
+
+    private List<List<Character>> getSubsetsHelper(String input, int index) {
+        List<List<Character>> result = new ArrayList<>();
+        result.add(new ArrayList<Character>());
+
+        if (input.isEmpty()) {
+            return result;
+        }
+
+        while (index < input.length()) {
+            char currentChar = input.charAt(index);
+
+            List<List<Character>> additionalResults = new ArrayList<>();
+            for (List<Character> characterList : result) {
+                List<Character> moreResults = new ArrayList<>(characterList);
+                moreResults.add(currentChar);
+                additionalResults.add(moreResults);
+            }
+
+            result.addAll(additionalResults);
+            index++;
+        }
+
+        return result;
+    }
 }

@@ -183,6 +183,39 @@ public class RecursiveTest {
         assertTrue(validateResults(results, "()()()", "()(())", "(()())", "(())()", "((()))"));
     }
 
+    @Test
+    public void canGetSubsets() {
+        List<String> results = recursive.getSubsets("abc");
+
+        assertNotNull(results);
+        assertEquals(8, results.size());
+        assertTrue(results.contains("{}"));
+        assertTrue(results.contains("{a}"));
+        assertTrue(results.contains("{b}"));
+        assertTrue(results.contains("{c}"));
+        assertTrue(results.contains("{a, b}"));
+        assertTrue(results.contains("{b, c}"));
+        assertTrue(results.contains("{a, b}"));
+        assertTrue(results.contains("{a, b, c}"));
+    }
+
+    @Test
+    public void canGetSubsetsWhenInputIsEmpty() {
+        List<String> results = recursive.getSubsets("");
+
+        assertNotNull(results);
+        assertEquals(1, results.size());
+        assertEquals("{}", results.get(0));
+    }
+
+    @Test
+    public void canGetSubsetsWhenInputIsNull() {
+        List<String> results = recursive.getSubsets(null);
+
+        assertNotNull(results);
+        assertTrue(results.isEmpty());
+    }
+
     private boolean validateResults(Set<Parentheses> results, String... expectedValues) {
         if (expectedValues == null) {
             return false;
